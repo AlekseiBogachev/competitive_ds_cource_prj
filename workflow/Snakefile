@@ -1,0 +1,24 @@
+rule all:
+    input:
+        "data/raw/car_train.csv",
+        "data/raw/car_test.csv",
+        "data/raw/rides_info.csv",
+        "data/raw/driver_info.csv",
+        "data/raw/fix_info.csv",
+
+
+rule get_raw_data:
+    input:
+        "src/data/links_to_raw_data.txt",
+    output:
+        "data/raw/car_train.csv",
+        "data/raw/car_test.csv",
+        "data/raw/rides_info.csv",
+        "data/raw/driver_info.csv",
+        "data/raw/fix_info.csv",
+    log:
+        "logs/snakemake_get_raw_data.log",
+    conda:
+        "requirements.txt"
+    shell:
+        "wget -P ./data/raw -i {input} -o ./logs/wget.log 2> {log}"

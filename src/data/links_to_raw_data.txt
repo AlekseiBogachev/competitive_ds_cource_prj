@@ -1,0 +1,5 @@
+https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/car_train.csv
+https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/car_test.csv
+https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/rides_info.csv
+https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/driver_info.csv
+https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/fix_info.csv
