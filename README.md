@@ -80,7 +80,7 @@ $\log$ - натуральный логарифм.
   
 ### Схема данных
 
-![ER-диаграмма]('./reports/figures/er_diag.svg')
+![ER-диаграмма](reports/figures/er_diag.svg)
 
 ## Project Organization
 
