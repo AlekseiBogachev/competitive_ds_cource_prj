@@ -18,7 +18,5 @@ rule get_raw_data:
         "data/raw/fix_info.csv",
     log:
         "logs/snakemake_get_raw_data.log",
-    conda:
-        "requirements.txt"
     shell:
         "wget -P ./data/raw -i {input} -o ./logs/wget.log 2> {log}"
