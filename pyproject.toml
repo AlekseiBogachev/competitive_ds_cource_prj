@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "competitive-ds-cource-prj"
+version = "0.1.0"
+description = "Проект для курса Введение в соревновательный Data Science на Stepic"
+authors = ["Aleksei Bogachev"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
