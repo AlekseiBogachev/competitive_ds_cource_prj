@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "competitive-ds-cource-prj"
+name = "comp_ds_prj"
 version = "0.1.0"
 description = "Проект для курса Введение в соревновательный Data Science на Stepic"
 authors = ["Aleksei Bogachev"]
