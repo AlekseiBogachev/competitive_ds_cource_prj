@@ -1317,13 +1317,13 @@ pgp = ["gpg"]
 
 [[package]]
 name = "dvc"
-version = "3.45.0"
+version = "3.47.0"
 description = "Git for data scientists - manage your code and data together"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "dvc-3.45.0-py3-none-any.whl", hash = "sha256:82fad5c23874c0c66bfbabc0aaa4afceba151be3398a56d53abc9fb11403320a"},
-    {file = "dvc-3.45.0.tar.gz", hash = "sha256:3d3bb4868cd88cafe6829b046baf98611d8c0f77f08e2c271462e5ab2a7dab7d"},
+    {file = "dvc-3.47.0-py3-none-any.whl", hash = "sha256:456fc0414b082510be0ee0df52b700619e2206aef243cd6dc3bd3a49f1f12bf6"},
+    {file = "dvc-3.47.0.tar.gz", hash = "sha256:892a005fe3ff81c26722f234a47c63d222a9686e611fa104aa962e0640e24b1d"},
 ]
 
 [package.dependencies]
@@ -1334,7 +1334,7 @@ dpath = ">=2.1.0,<3"
 dvc-data = ">=3.13,<3.14"
 dvc-http = ">=2.29.0"
 dvc-render = ">=1.0.1,<2"
-dvc-studio-client = ">=0.19,<1"
+dvc-studio-client = ">=0.20,<1"
 dvc-task = ">=0.3.0,<1"
 flatten-dict = ">=0.4.1,<1"
 "flufl.lock" = ">=5,<8"
@@ -5500,18 +5500,18 @@ dev = ["flake8", "flake8-annotations", "flake8-bandit", "flake8-bugbear", "flake
 
 [[package]]
 name = "urllib3"
-version = "2.2.1"
+version = "2.0.7"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.7"
 files = [
-    {file = "urllib3-2.2.1-py3-none-any.whl", hash = "sha256:450b20ec296a467077128bff42b73080516e71b56ff59a60a02bef2232c4fa9d"},
-    {file = "urllib3-2.2.1.tar.gz", hash = "sha256:d0570876c61ab9e520d776c38acbbb5b05a776d3f9ff98a5c8fd5162a444cf19"},
+    {file = "urllib3-2.0.7-py3-none-any.whl", hash = "sha256:fdb6d215c776278489906c2f8916e6e7d4f5a9b602ccbcfdf7f016fc8da0596e"},
+    {file = "urllib3-2.0.7.tar.gz", hash = "sha256:c97dfde1f7bd43a71c8d2a58e369e9b2bf692d1334ea9f9cae55add7d0dd0f84"},
 ]
 
 [package.extras]
 brotli = ["brotli (>=1.0.9)", "brotlicffi (>=0.8.0)"]
-h2 = ["h2 (>=4,<5)"]
+secure = ["certifi", "cryptography (>=1.9)", "idna (>=2.0.0)", "pyopenssl (>=17.1.0)", "urllib3-secure-extra"]
 socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
@@ -5846,4 +5846,4 @@ test = ["zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "5881be0f289c13cc3abe64450d0c459af8a667540232dfc2bddf9c603573124f"
+content-hash = "070fc0af9195a58f8a4afe924d895bf075e965acbd0a74bd3c287f2f82b89882"
