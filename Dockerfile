@@ -12,7 +12,7 @@ RUN poetry config installer.max-workers 10
 COPY poetry.lock pyproject.toml /comp_ds_prj/
 RUN poetry install --no-root
 
-# COPY . .
-# RUN poetry install
+RUN git config --global user.name "Aleksei Bogachev"
+RUN git config --global user.email "bogachev.aleksey.m@gmail.com"
 
 CMD /bin/bash
