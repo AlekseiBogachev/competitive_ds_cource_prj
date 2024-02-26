@@ -1,5 +1,9 @@
 name: Tests and Linters
-on: workflow_dispatch # push
+on: 
+  workflow_dispatch:
+  push:
+    branches:
+      - "cicd"
 jobs:
   run_tests_and_linters:
     runs-on: ubuntu-22.04
