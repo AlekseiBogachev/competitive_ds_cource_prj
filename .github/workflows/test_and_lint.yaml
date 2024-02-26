@@ -15,6 +15,9 @@ jobs:
       - name: Check Python version
         run: python --version
 
+      - name: Install Poetry Action
+        uses: snok/install-poetry@v1.3.4
+            
       - name: Check Poetry version
         run: poetry --version
 
