@@ -1,13 +1,25 @@
 name: Tests and Linters
-on: workflow_dispatch
+on: workflow_dispatch # push
 jobs:
-  run_test:
+  run_tests_and_linters:
     runs-on: ubuntu-22.04
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5.0.0
+        with:
+          python-version: '3.11'
+        run: python --version
+
+      - name: Check Poetry
+        run: echo poetry --version
+
       - name: Print number of tests
         run: echo There are no tests!
-  run_linters:
-    runs-on: ubuntu-22.04
-    steps:
+  # run_linters:
+  #   runs-on: ubuntu-22.04
+  #   steps:
       - name: Print number of linters
         run: echo There are no checks for linters!
