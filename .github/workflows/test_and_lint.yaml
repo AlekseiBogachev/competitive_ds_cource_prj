@@ -17,8 +17,9 @@ jobs:
 
       - name: Install Poetry Action
         uses: snok/install-poetry@v1.3.4
-        with:
-          installer-max-workers: 10
+        
+      - name: Poetry config installer.max-workers
+        run: poetry config installer.max-workers 10
             
       - name: Check Poetry version
         run: poetry --version
