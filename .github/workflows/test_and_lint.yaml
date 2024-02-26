@@ -27,6 +27,9 @@ jobs:
       - name: Poetry check configs
         run: poetry config --list
 
+      - name: Install dependencies
+        run: poetry install --no-root
+
       - name: Print number of tests
         run: echo There are no tests!
   # run_linters:
