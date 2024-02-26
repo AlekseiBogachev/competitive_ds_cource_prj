@@ -16,7 +16,7 @@ jobs:
         run: python --version
 
       - name: Check Poetry version
-        run: echo poetry --version
+        run: poetry --version
 
       - name: Print number of tests
         run: echo There are no tests!
