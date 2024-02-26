@@ -35,5 +35,5 @@ jobs:
   # run_linters:
   #   runs-on: ubuntu-22.04
   #   steps:
-      - name: Print number of linters
-        run: echo There are no checks for linters!
+      - name: Print Snakemake version
+        run: snakemake --version
