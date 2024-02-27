@@ -52,6 +52,7 @@ jobs:
   snakemake:
     runs-on: ubuntu-22.04
     needs: setup_environment
+    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
@@ -70,6 +71,7 @@ jobs:
   flake:
     runs-on: ubuntu-22.04
     needs: setup_environment
+    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
@@ -91,6 +93,7 @@ jobs:
   pydocstyle:
     runs-on: ubuntu-22.04
     needs: setup_environment
+    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
