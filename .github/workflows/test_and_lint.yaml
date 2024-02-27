@@ -6,7 +6,7 @@ on:
       - "cicd"
 env:
   POETRY_INSTALLER_MAX_WORKERS: 10
-  GDRIVE_CREDENTIALS_DATA: DVC_GDRIVE_SECRET
+  GDRIVE_CREDENTIALS_DATA: ${{ secrets.DVC_GDRIVE_SECRET }}
 jobs:
   setup_environment:
     runs-on: ubuntu-22.04
@@ -29,7 +29,9 @@ jobs:
         run: poetry --version
 
       - name: Poetry check configs
-        run: poetry config --list
+        run: |
+          poetry config --list
+          echo GDRIVE_CREDENTIALS_DATA
 
   autoformatter:
     runs-on: ubuntu-22.04
