@@ -74,6 +74,9 @@ jobs:
           cache: 'poetry'
       - run: poetry install --no-root
 
+      - name: Pull data
+        run: dvc pull
+
       - name: Print number of tests
         run: echo There are no tests!
 
