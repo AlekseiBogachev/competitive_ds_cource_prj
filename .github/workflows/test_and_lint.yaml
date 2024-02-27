@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - "cicd"
+env:
+  POETRY_INSTALLER_MAX_WORKERS: 10
+  GDRIVE_CREDENTIALS_DATA: DVC_GDRIVE_SECRET
 jobs:
   setup_environment:
     runs-on: ubuntu-22.04
@@ -18,9 +21,6 @@ jobs:
           python-version: '3.11'
           cache: 'poetry'
       - run: poetry install --no-root
-        
-      - name: Poetry config installer.max-workers
-        run: poetry config installer.max-workers 10
 
       - name: Check Python version
         run: python --version
