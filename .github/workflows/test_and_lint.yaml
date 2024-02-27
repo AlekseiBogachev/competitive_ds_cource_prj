@@ -31,9 +31,27 @@ jobs:
       - name: Poetry check configs
         run: poetry config --list
 
-  test:
+  autoformatter:
     runs-on: ubuntu-22.04
     needs: setup_environment
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Install poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v5.0.0
+        with:
+          python-version: '3.11'
+          cache: 'poetry'
+      - run: poetry install --no-root
+
+      - name: test poetry
+        run: poetry config --list
+
+  test:
+    runs-on: ubuntu-22.04
+    needs: [setup_environment, autoformatter]
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
@@ -51,7 +69,7 @@ jobs:
 
   snakemake:
     runs-on: ubuntu-22.04
-    needs: setup_environment
+    needs: [setup_environment, autoformatter]
     continue-on-error: true
     steps:
       - name: Checkout
@@ -70,7 +88,7 @@ jobs:
 
   flake:
     runs-on: ubuntu-22.04
-    needs: setup_environment
+    needs: [setup_environment, autoformatter]
     continue-on-error: true
     steps:
       - name: Checkout
@@ -92,7 +110,7 @@ jobs:
 
   pydocstyle:
     runs-on: ubuntu-22.04
-    needs: setup_environment
+    needs: [setup_environment, autoformatter]
     continue-on-error: true
     steps:
       - name: Checkout
@@ -114,7 +132,7 @@ jobs:
 
   mypy:
     runs-on: ubuntu-22.04
-    needs: setup_environment
+    needs: [setup_environment, autoformatter]
     continue-on-error: true
     steps:
       - name: Checkout
