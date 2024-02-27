@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-import click
-from dotenv import find_dotenv, load_dotenv
 import logging
 from pathlib import Path
+
+import click
+from dotenv import find_dotenv, load_dotenv
 
 
 @click.command()
