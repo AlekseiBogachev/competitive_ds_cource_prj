@@ -63,6 +63,6 @@ jobs:
           python-version: '3.11'
           cache: 'poetry'
       - run: poetry install --no-root
-      
+
       - name: Print Snakemake version
-        run: poetry run snakemake --version
+        run: poetry run snakemake --lint
