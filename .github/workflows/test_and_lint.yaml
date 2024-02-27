@@ -29,9 +29,7 @@ jobs:
         run: poetry --version
 
       - name: Poetry check configs
-        run: |
-          poetry config --list
-          echo GDRIVE_CREDENTIALS_DATA
+        run: poetry config --list
 
   autoformatter:
     runs-on: ubuntu-22.04
@@ -48,9 +46,15 @@ jobs:
           cache: 'poetry'
       - run: poetry install --no-root
 
-      - name: test poetry
-        run: poetry config --list
+      - name: isort Python modules
+        run: poetry run isort ./comp_ds_prj/
 
+      - name: isort Jupyter Notebooks
+        run: poetry run nbqa isort ./notebooks/
+
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v5.0.0
+            
   test:
     runs-on: ubuntu-22.04
     needs: [setup_environment, autoformatter]
