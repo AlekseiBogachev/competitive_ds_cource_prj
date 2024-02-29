@@ -2,8 +2,11 @@ name: Tests and Linters
 on: 
   workflow_dispatch:
   push:
+    branches-ignore:
+      - docs
+  pull_request:
     branches:
-      - "cicd"
+      - main
 env:
   POETRY_INSTALLER_MAX_WORKERS: 10
   GDRIVE_CREDENTIALS_DATA: ${{ secrets.DVC_GDRIVE_SECRET }}
