@@ -1,0 +1,27 @@
+schema: '2.0'
+stages:
+  combine_data:
+    cmd: poetry run python comp_ds_prj/data/combine_data.py ./data/raw/car_train.csv
+      ./data/raw/rides_info.csv -o ./data/interim/raw_dataset.csv
+    deps:
+    - path: data/raw/car_train.csv
+      hash: md5
+      md5: 2e8105bb141770763522c5c92c3ddb4c
+      size: 183405
+    - path: data/raw/driver_info.csv
+      hash: md5
+      md5: 611af5ab35a99f95cebe190aec8cde19
+      size: 583419
+    - path: data/raw/fix_info.csv
+      hash: md5
+      md5: 5e67891e17909e561d863c6a8b037665
+      size: 6568688
+    - path: data/raw/rides_info.csv
+      hash: md5
+      md5: 887431f089fe3d791e92d817a46bf573
+      size: 81586278
+    outs:
+    - path: data/interim/raw_dataset.csv
+      hash: md5
+      md5: 82e977645e01745affeec5c1a5ff5b67
+      size: 379270

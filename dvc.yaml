@@ -1,0 +1,11 @@
+stages:
+  combine_data:
+    cmd: poetry run python comp_ds_prj/data/combine_data.py ./data/raw/car_train.csv
+      ./data/raw/rides_info.csv -o ./data/interim/raw_dataset.csv
+    deps:
+    - data/raw/car_train.csv
+    - data/raw/driver_info.csv
+    - data/raw/fix_info.csv
+    - data/raw/rides_info.csv
+    outs:
+    - data/interim/raw_dataset.csv
