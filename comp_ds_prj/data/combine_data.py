@@ -85,7 +85,8 @@ def combine_data(
     rides_info: pd.DataFrame = pd.read_csv(rides_info_filepath)
 
     rides_df_gr: pd.DataFrame = (
-        rides_info.groupby('car_id', as_index=False)
+        rides_info
+        .groupby('car_id', as_index=False)
         .agg(
             mean_rating=('rating', 'mean'),
             istance_sum=('distance', 'sum'),
