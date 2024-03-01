@@ -83,25 +83,6 @@ jobs:
       - name: Print number of tests
         run: echo There are no tests!
 
-  snakemake:
-    runs-on: ubuntu-22.04
-    needs: [setup_environment, autoformatter]
-    continue-on-error: true
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
-        with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install --no-root
-
-      - name: Print Snakemake version
-        run: poetry run snakemake --lint
-
   flake:
     runs-on: ubuntu-22.04
     needs: [setup_environment, autoformatter]
