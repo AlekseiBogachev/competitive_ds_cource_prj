@@ -1,28 +1,17 @@
 # -*- coding: utf-8 -*-
 """Подготовка сырого датасета к генерации новых признаков."""
 
+from comp_ds_prj import setup_logging_to_file
+
 import logging
 from pathlib import Path
 
 import click
 import pandas as pd
 
+
+logger: logging.Logger = setup_logging_to_file()
 project_dir: Path = Path(__file__).resolve().parents[2]
-logs_path: Path = Path.joinpath(project_dir, 'logs')
-logs_path.mkdir(parents=True, exist_ok=True)
-
-logger: logging.Logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-
-raw_data_handler: logging.FileHandler = logging.FileHandler(
-    Path.joinpath(logs_path, f'{__name__}.log'), mode='a'
-)
-raw_data_formatter: logging.Formatter = logging.Formatter(
-    '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-
-raw_data_handler.setFormatter(raw_data_formatter)
-logger.addHandler(raw_data_handler)
 
 
 @click.command()

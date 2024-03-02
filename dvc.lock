@@ -31,8 +31,8 @@ stages:
     deps:
     - path: ./comp_ds_prj/features/build_features.py
       hash: md5
-      md5: c226c97917c2a4bdeccf8dc5c9a5ed50
-      size: 2624
+      md5: 3ee8db08876effaa51d7160cdf58802c
+      size: 2210
     - path: data/interim/raw_dataset.csv
       hash: md5
       md5: 82e977645e01745affeec5c1a5ff5b67
