@@ -7,11 +7,11 @@ from pathlib import Path
 import click
 import pandas as pd
 
-project_dir = Path(__file__).resolve().parents[2]
-logs_path = Path.joinpath(project_dir, 'logs')
+project_dir: Path = Path(__file__).resolve().parents[2]
+logs_path: Path = Path.joinpath(project_dir, 'logs')
 logs_path.mkdir(parents=True, exist_ok=True)
 
-logger = logging.getLogger(__name__)
+logger: logging.Logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 raw_data_handler: logging.FileHandler = logging.FileHandler(
@@ -36,7 +36,7 @@ logger.addHandler(raw_data_handler)
 )
 @click.option(
     '-o', '--output', 'output_filepath',
-    default='./data/interim/raw_dataset.csv',
+    default=Path.joinpath(project_dir, 'data', 'interim', 'raw_dataset.csv'),
     type=click.Path(),
     help='Имя файла, в который будет сохранён результирующий датасет.'
          'Значение по умолчанию <project_dir>/data/interim/raw_dataset.csv',

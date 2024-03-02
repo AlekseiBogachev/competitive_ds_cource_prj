@@ -25,3 +25,20 @@ stages:
       hash: md5
       md5: 82e977645e01745affeec5c1a5ff5b67
       size: 379270
+  prepare_features:
+    cmd: poetry run python comp_ds_prj/features/build_features.py -i data/interim/raw_dataset.csv
+      -o data/processed/train.csv
+    deps:
+    - path: ./comp_ds_prj/features/build_features.py
+      hash: md5
+      md5: c226c97917c2a4bdeccf8dc5c9a5ed50
+      size: 2624
+    - path: data/interim/raw_dataset.csv
+      hash: md5
+      md5: 82e977645e01745affeec5c1a5ff5b67
+      size: 379270
+    outs:
+    - path: data/processed/train.csv
+      hash: md5
+      md5: a8850d8461a0128833a8bb515c2639cf
+      size: 352854

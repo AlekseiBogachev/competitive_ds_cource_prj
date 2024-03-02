@@ -9,3 +9,11 @@ stages:
     - data/raw/rides_info.csv
     outs:
     - data/interim/raw_dataset.csv
+  prepare_features:
+    cmd: poetry run python comp_ds_prj/features/build_features.py -i data/interim/raw_dataset.csv
+      -o data/processed/train.csv
+    deps:
+    - ./comp_ds_prj/features/build_features.py
+    - data/interim/raw_dataset.csv
+    outs:
+    - data/processed/train.csv
