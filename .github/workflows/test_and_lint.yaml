@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'poetry'
-      - run: poetry install
+      - run: poetry install --no-root
 
       - name: Check Python version
         run: python --version
