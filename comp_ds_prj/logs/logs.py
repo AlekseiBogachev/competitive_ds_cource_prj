@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
-"""Логирование"""
+"""Логирование."""
 
 import logging
 from pathlib import Path
+from typing import Union
 
 
 def setup_logging_to_file(
-        dir: str = None,
+        dir: Union[str, None] = None,
         format_str: str = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 ) -> logging.Logger:
-    """Возвращает настроенный логер для записи журнала в формате format_str
-    в каталог dir.
+    """Возвращает настроенный логер для записи журнала.
 
-    Если dir равен None, то журнал будет записываться в каталог
+    Возвращает настроенный логер для записи журнала в формате format_str в
+    каталог dir. Если dir равен None, то журнал будет записываться в каталог
     <project_dir>/logs
 
     Parameters
@@ -29,7 +30,6 @@ def setup_logging_to_file(
     logging.Logger
         Настроенный логер.
     """
-
     project_dir: Path = Path(__file__).resolve().parents[2]
     logs_path: Path = Path.joinpath(project_dir, 'logs')
 
