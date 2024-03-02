@@ -4,6 +4,10 @@ stages:
     cmd: poetry run python comp_ds_prj/data/combine_data.py ./data/raw/car_train.csv
       ./data/raw/rides_info.csv -o ./data/interim/raw_dataset.csv
     deps:
+    - path: ./comp_ds_prj/data/combine_data.py
+      hash: md5
+      md5: 8ed7b0350cae15416775d387d562e84b
+      size: 3999
     - path: data/raw/car_train.csv
       hash: md5
       md5: 2e8105bb141770763522c5c92c3ddb4c
@@ -31,8 +35,8 @@ stages:
     deps:
     - path: ./comp_ds_prj/features/build_features.py
       hash: md5
-      md5: 3ee8db08876effaa51d7160cdf58802c
-      size: 2210
+      md5: 7d9f6996abe2c883740ed65bd75c1d21
+      size: 2209
     - path: data/interim/raw_dataset.csv
       hash: md5
       md5: 82e977645e01745affeec5c1a5ff5b67
