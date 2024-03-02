@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 """Подготовка новых признаков и удаление неинформативных."""
 
-from comp_ds_prj import setup_logging_to_file
-
 import logging
 from pathlib import Path
 
 import click
 import pandas as pd
 
+from comp_ds_prj import setup_logging_to_file
 
 logger: logging.Logger = setup_logging_to_file()
 project_dir: Path = Path(__file__).resolve().parents[2]
