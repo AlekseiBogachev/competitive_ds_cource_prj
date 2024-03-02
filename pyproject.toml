@@ -64,4 +64,4 @@ ignore_missing_imports = true
 
 [tool.pydocstyle]
 convention = "numpy"
-add_ignore = ["D301","D104"]
+add_ignore = "D301"
