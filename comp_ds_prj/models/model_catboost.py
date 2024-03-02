@@ -8,7 +8,6 @@ import click
 
 from comp_ds_prj import setup_logging_to_file
 
-
 logger: logging.Logger = setup_logging_to_file()
 project_dir: Path = Path(__file__).resolve().parents[2]
 
