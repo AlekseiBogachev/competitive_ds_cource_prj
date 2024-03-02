@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'poetry'
-      - run: poetry install --no-root
+      - run: poetry install
 
       - name: Check Python version
         run: python --version
@@ -49,7 +49,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'poetry'
-      - run: poetry install --no-root
+      - run: poetry install
 
       - name: isort Python modules
         run: poetry run isort ./comp_ds_prj/
@@ -97,7 +97,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'poetry'
-      - run: poetry install --no-root
+      - run: poetry install
 
       - name: Check Python modules
         run: poetry run flake8 ./comp_ds_prj/
@@ -119,7 +119,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'poetry'
-      - run: poetry install --no-root
+      - run: poetry install
 
       - name: Check Python modules
         run: poetry run pydocstyle --match='(?!test_|__init__).*\.py' ./comp_ds_prj/
@@ -141,7 +141,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'poetry'
-      - run: poetry install --no-root
+      - run: poetry install
 
       - name: Check Python modules
         run: poetry run mypy ./comp_ds_prj/
