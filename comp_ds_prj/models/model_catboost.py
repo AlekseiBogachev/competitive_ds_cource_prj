@@ -5,11 +5,11 @@ import logging
 from pathlib import Path
 from typing import List
 
-from catboost import CatBoostClassifier
 import click
-from joblib import dump
 import numpy as np
 import pandas as pd
+from catboost import CatBoostClassifier
+from joblib import dump
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
