@@ -47,10 +47,10 @@ stages:
     - ./data/processed/submission_features.csv
   sumbmission_predict:
     cmd: poetry run python ./comp_ds_prj/models/model_catboost.py predict -i ./data/processed/submission_features.csv
-      -m ./models/catboost.joblib -o ./data/submissions/submission.scv
+      -m ./models/catboost.joblib -o ./data/submissions/submission.csv
     deps:
     - ./comp_ds_prj/models/model_catboost.py
     - ./data/processed/submission_features.csv
     - ./models/catboost.joblib
     outs:
-    - ./data/submissions/submission.scv
+    - ./data/submissions/submission.csv

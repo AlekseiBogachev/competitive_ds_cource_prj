@@ -8,8 +8,9 @@ from typing import List
 import click
 import numpy as np
 import pandas as pd
+import catboost
 from catboost import CatBoostClassifier
-from joblib import dump
+from joblib import dump, load
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
@@ -80,7 +81,7 @@ def train(input_filepath: str, output_filepath: str) -> None:
     logger.info(f"Количественные признаки: {num_features}")
 
     data: List[np.ndarray] = train_test_split(
-        X, y, test_size=0.2, random_state=42
+        X.drop(columns='car_id'), y, test_size=0.2, random_state=42
     )
     X_train, X_test, y_train, y_test = data
 
@@ -91,7 +92,9 @@ def train(input_filepath: str, output_filepath: str) -> None:
 
     logger.info('Инициализация классификатора')
 
-    clf = CatBoostClassifier(cat_features=cat_features)
+    clf: catboost.core.CatBoostClassifier = CatBoostClassifier(
+        cat_features=cat_features
+    )
 
     logger.info("Обучение модели")
 
@@ -141,10 +144,10 @@ def train(input_filepath: str, output_filepath: str) -> None:
     "--output",
     "output_filepath",
     default=Path.joinpath(
-        project_dir, "data", "submissions", "submission.scv",
+        project_dir, "data", "submissions", "submission.csv",
     ),
     help="Имя файла с подготовленным прогнозом. Значение по умолчанию"
-         "<project_dir>/data/submissions/submission.scv",
+         "<project_dir>/data/submissions/submission.csv",
 )
 def predict(
     input_filepath: str,
@@ -172,17 +175,26 @@ def predict(
         <project_dir>/models/catboost.joblib
     output_filepath : str
         Имя файла с подготовленным прогнозом. Значение по умолчанию
-        <project_dir>/data/submissions/submission.scv
+        <project_dir>/data/submissions/submission.csv
     """
     logger.info(
         "Подготовка прогноза для Kaggle. "
         f"Модель: {model_filepath}. Признаки {input_filepath}."
     )
 
+    logger.info("Загрузка модели.")
+    clf: catboost.core.CatBoostClassifier =  load(model_filepath)
+
+    logger.info("Четение признаков.")
+    submission: pd.DataFrame = pd.read_csv(input_filepath)
+
+    logger.info("Подготовка прогноза.")
+    submission["target_class"] = clf.predict(submission.drop(columns='car_id'))
+
     logger.info(f"Сохранение результата в {output_filepath}.")
     (
-        pd
-        .DataFrame(columns=["car_id", "target_class"])
+        submission
+        .loc[:, ["car_id", "target_class"]]
         .to_csv(output_filepath, index=False)
     )
 

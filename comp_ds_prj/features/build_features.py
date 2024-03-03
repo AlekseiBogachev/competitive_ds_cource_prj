@@ -34,7 +34,7 @@ def build_features(
 ) -> None:
     """Добавляет в датасет новые признаки и удаляет ненужные.
 
-    Удаляет признак car_id.\f
+    Готовит признаки.\f
 
     Parameters
     ----------
@@ -49,9 +49,6 @@ def build_features(
 
     logger.info(f'Чтение датафрейма для обработки {input_filepath}')
     df: pd.DataFrame = pd.read_csv(input_filepath)
-
-    logger.info('Удаление признака car_id')
-    df = df.drop(columns='car_id')
 
     logger.info(f'Запись датафрейма с результатом в файл {output_filepath}')
     df.to_csv(output_filepath, index=False)
