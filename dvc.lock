@@ -61,5 +61,5 @@ stages:
     outs:
     - path: ./models/catboost.joblib
       hash: md5
-      md5: 409b4fa607f8e7d2ae51985975da43dc
+      md5: d068c910e698d6105afb4663bfd07b80
       size: 895458
