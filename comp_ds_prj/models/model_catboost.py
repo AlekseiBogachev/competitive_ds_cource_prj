@@ -183,7 +183,7 @@ def predict(
     )
 
     logger.info("Загрузка модели.")
-    clf: catboost.core.CatBoostClassifier =  load(model_filepath)
+    clf: catboost.core.CatBoostClassifier = load(model_filepath)
 
     logger.info("Четение признаков.")
     submission: pd.DataFrame = pd.read_csv(input_filepath)

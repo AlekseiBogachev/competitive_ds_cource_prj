@@ -52,8 +52,8 @@ stages:
     deps:
     - path: ./comp_ds_prj/models/model_catboost.py
       hash: md5
-      md5: d2b736cc8333bde4babcd0355ae8406e
-      size: 7807
+      md5: ecfaf992de23b0616bceed42e36bfc53
+      size: 7806
     - path: ./data/processed/train.csv
       hash: md5
       md5: 8c7de15e96ad9d44949fd24db945b538
@@ -61,7 +61,7 @@ stages:
     outs:
     - path: ./models/catboost.joblib
       hash: md5
-      md5: 27c5f25aa7fa2952c214f97256bbbb85
+      md5: 1fb65256a31d63e8fb44688b90538a63
       size: 895458
   submission_combine_data:
     cmd: poetry run python comp_ds_prj/data/combine_data.py ./data/raw/car_test.csv
@@ -115,15 +115,15 @@ stages:
     deps:
     - path: ./comp_ds_prj/models/model_catboost.py
       hash: md5
-      md5: d2b736cc8333bde4babcd0355ae8406e
-      size: 7807
+      md5: ecfaf992de23b0616bceed42e36bfc53
+      size: 7806
     - path: ./data/processed/submission_features.csv
       hash: md5
       md5: f85436302966c56245b3869acc901ba9
       size: 274349
     - path: ./models/catboost.joblib
       hash: md5
-      md5: 27c5f25aa7fa2952c214f97256bbbb85
+      md5: 1fb65256a31d63e8fb44688b90538a63
       size: 895458
     outs:
     - path: ./data/submissions/submission.csv
