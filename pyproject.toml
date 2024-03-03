@@ -58,7 +58,13 @@ warn_return_any = true
 warn_unused_configs = true
 
 [[tool.mypy.overrides]]
-module = 'kaggle'
+module = [
+    "catboost",
+    "joblib",
+    "sklearn",
+    "sklearn.metrics",
+    "sklearn.model_selection"
+]
 ignore_missing_imports = true
 
 

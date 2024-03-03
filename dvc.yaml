@@ -18,3 +18,11 @@ stages:
     - data/interim/raw_dataset.csv
     outs:
     - data/processed/train.csv
+  train_model:
+    cmd: poetry run python comp_ds_prj/models/model_catboost.py -i ./data/processed/train.csv
+      -o ./models/catboost.joblib
+    deps:
+    - ./comp_ds_prj/models/model_catboost.py
+    - ./data/processed/train.csv
+    outs:
+    - ./models/catboost.joblib
