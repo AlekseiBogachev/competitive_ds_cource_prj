@@ -19,6 +19,12 @@ logger: logging.Logger = setup_logging_to_file()
 project_dir: Path = Path(__file__).resolve().parents[2]
 
 
+@click.group()
+def cli() -> None:
+    """Создаёт группу комманд интерфейса коммандной строки."""
+    pass
+
+
 @click.command()
 @click.option(
     "-i",
@@ -106,5 +112,85 @@ def train(input_filepath: str, output_filepath: str) -> None:
     return None
 
 
+@click.command()
+@click.option(
+    "-i",
+    "--input",
+    "input_filepath",
+    default=Path.joinpath(
+        project_dir, "data", "processed", "submission_features.csv"
+    ),
+    type=click.Path(exists=True),
+    help="Имя файла с подготовленными признаками по которым надо подготовить "
+    "прогноз. Значение по умолчанию <project_dir>/data/processed"
+    "/submission_features.csv",
+)
+@click.option(
+    "-m",
+    "--model",
+    "model_filepath",
+    default=Path.joinpath(
+        project_dir, "model", "catboost.joblib",
+    ),
+    type=click.Path(exists=True),
+    help="Имя файла с сохраненной моделью. Значение по умолчанию"
+    "<project_dir>/models/catboost.joblib",
+)
+@click.option(
+    "-o",
+    "--output",
+    "output_filepath",
+    default=Path.joinpath(
+        project_dir, "data", "submissions", "submission.scv",
+    ),
+    help="Имя файла с подготовленным прогнозом. Значение по умолчанию"
+         "<project_dir>/data/submissions/submission.scv",
+)
+def predict(
+    input_filepath: str,
+    model_filepath: str,
+    output_filepath: str,
+) -> None:
+    """Готовит прогноз для загрузки на Kaggle.
+
+    Готовит прогноз для загрузки на Kaggle. Функция принимает путь к
+    подготовленному датасетом для подготовки прогноза для Kaggle (submission),
+    который должен уже быть очищен и содержать все необходимые признаки (функция
+    только готовит прогноз, остальные шаги уже должны быть выполнены), путь
+    к файлу, в который сохранена модель, и путь к файлу в который будет сохранён
+    результат. Результат представляет из себя датафрейм, сохранённый в формате
+    .csv и состоящий из двух столбцов car_id и target_class\f
+
+    Parameters
+    ----------
+    input_filepath : str
+        Имя файла с подготовленными признаками по которым надо подготовить
+        прогноз. Значение по умолчанию <project_dir>/data/processed
+        /submission_features.csv
+    model_filepath : str
+        Имя файла с сохраненной моделью. Значение по умолчанию
+        <project_dir>/models/catboost.joblib
+    output_filepath : str
+        Имя файла с подготовленным прогнозом. Значение по умолчанию
+        <project_dir>/data/submissions/submission.scv
+    """
+    logger.info(
+        "Подготовка прогноза для Kaggle. "
+        f"Модель: {model_filepath}. Признаки {input_filepath}."
+    )
+
+    logger.info(f"Сохранение результата в {output_filepath}.")
+    (
+        pd
+        .DataFrame(columns=["car_id", "target_class"])
+        .to_csv(output_filepath, index=False)
+    )
+
+    return None
+
+
+cli.add_command(train)
+cli.add_command(predict)
+
 if __name__ == "__main__":
-    train()
+    cli()
