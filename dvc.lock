@@ -52,8 +52,8 @@ stages:
     deps:
     - path: ./comp_ds_prj/models/model_catboost.py
       hash: md5
-      md5: 7e736398b48572635ad8e389c47f0ef4
-      size: 3556
+      md5: 8d32387ccfb4c4fcf7ac2e0500982a76
+      size: 3822
     - path: ./data/processed/train.csv
       hash: md5
       md5: a8850d8461a0128833a8bb515c2639cf
@@ -61,5 +61,5 @@ stages:
     outs:
     - path: ./models/catboost.joblib
       hash: md5
-      md5: 62c1b07a1272a57f4389979f54a28b7f
+      md5: 409b4fa607f8e7d2ae51985975da43dc
       size: 895458

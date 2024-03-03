@@ -39,7 +39,11 @@ project_dir: Path = Path(__file__).resolve().parents[2]
     "<project_dir>/models/catboost.joblib",
 )
 def train(input_filepath: str, output_filepath: str) -> None:
-    """Обучает и сохраняет модель в файл.\f
+    """Обучает и сохраняет модель в файл.
+
+    Обучает модель на тренировочном датасете (по умолчанию
+    <project_dir>/data/processed/train.csv) и сохраняет её в файл (по умолчанию
+    <project_dir>/data/processed/catboost.joblib).\f
 
     Parameters
     ----------
