@@ -49,7 +49,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'poetry'
-      - run: poetry install --no-root
+      - run: poetry install
 
       - name: isort Python modules
         run: poetry run isort ./comp_ds_prj/
@@ -75,32 +75,13 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'poetry'
-      - run: poetry install --no-root
+      - run: poetry install
 
       - name: Pull data
         run: poetry run dvc pull
 
       - name: Print number of tests
         run: echo There are no tests!
-
-  snakemake:
-    runs-on: ubuntu-22.04
-    needs: [setup_environment, autoformatter]
-    continue-on-error: true
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
-        with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install --no-root
-
-      - name: Print Snakemake version
-        run: poetry run snakemake --lint
 
   flake:
     runs-on: ubuntu-22.04
@@ -116,7 +97,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'poetry'
-      - run: poetry install --no-root
+      - run: poetry install
 
       - name: Check Python modules
         run: poetry run flake8 ./comp_ds_prj/
@@ -138,7 +119,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'poetry'
-      - run: poetry install --no-root
+      - run: poetry install
 
       - name: Check Python modules
         run: poetry run pydocstyle --match='(?!test_|__init__).*\.py' ./comp_ds_prj/
@@ -160,7 +141,7 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'poetry'
-      - run: poetry install --no-root
+      - run: poetry install
 
       - name: Check Python modules
         run: poetry run mypy ./comp_ds_prj/

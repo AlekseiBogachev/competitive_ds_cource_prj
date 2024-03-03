@@ -96,3 +96,6 @@ target/
 
 # Google Drive
 /.gdrive/
+
+# Catboost
+/catboost_info/

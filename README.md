@@ -24,7 +24,7 @@ $\log$ - натуральный логарифм.
 
 Данные состоят из несколько их файлов. Описание машин и информация о поломках собраны в следующих:
 - [`car_train.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/car_train.csv) - данные для обучения моделей;
-- [`car_test.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/car_test.csv) - данные для тестирования моделей;
+- [`car_test.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/car_test.csv) - данные для подготовки прогноза для соревнования;
 
 Опписание столбцов из `car_train.csv`, `car_test.csv`:
 - `car_id` - идентификатор машины;

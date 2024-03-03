@@ -1,0 +1,56 @@
+stages:
+  combine_data:
+    cmd: poetry run python comp_ds_prj/data/combine_data.py ./data/raw/car_train.csv
+      ./data/raw/rides_info.csv -o ./data/interim/raw_dataset.csv
+    deps:
+    - ./comp_ds_prj/data/combine_data.py
+    - data/raw/car_train.csv
+    - data/raw/driver_info.csv
+    - data/raw/fix_info.csv
+    - data/raw/rides_info.csv
+    outs:
+    - data/interim/raw_dataset.csv
+  prepare_features:
+    cmd: poetry run python comp_ds_prj/features/build_features.py -i data/interim/raw_dataset.csv
+      -o data/processed/train.csv
+    deps:
+    - ./comp_ds_prj/features/build_features.py
+    - data/interim/raw_dataset.csv
+    outs:
+    - data/processed/train.csv
+  train_model:
+    cmd: poetry run python comp_ds_prj/models/model_catboost.py train -i ./data/processed/train.csv
+      -o ./models/catboost.joblib
+    deps:
+    - ./comp_ds_prj/models/model_catboost.py
+    - ./data/processed/train.csv
+    outs:
+    - ./models/catboost.joblib
+  submission_combine_data:
+    cmd: poetry run python comp_ds_prj/data/combine_data.py ./data/raw/car_test.csv
+      ./data/raw/rides_info.csv -o ./data/interim/submission_raw_dataset.csv
+    deps:
+    - ./comp_ds_prj/data/combine_data.py
+    - ./data/raw/car_test.csv
+    - ./data/raw/driver_info.csv
+    - ./data/raw/fix_info.csv
+    - ./data/raw/rides_info.csv
+    outs:
+    - ./data/interim/submission_raw_dataset.csv
+  submission_prepare_features:
+    cmd: poetry run python comp_ds_prj/features/build_features.py -i data/interim/submission_raw_dataset.csv
+      -o data/processed/submission_features.csv
+    deps:
+    - ./comp_ds_prj/features/build_features.py
+    - ./data/interim/submission_raw_dataset.csv
+    outs:
+    - ./data/processed/submission_features.csv
+  sumbmission_predict:
+    cmd: poetry run python ./comp_ds_prj/models/model_catboost.py predict -i ./data/processed/submission_features.csv
+      -m ./models/catboost.joblib -o ./data/submissions/submission.csv
+    deps:
+    - ./comp_ds_prj/models/model_catboost.py
+    - ./data/processed/submission_features.csv
+    - ./models/catboost.joblib
+    outs:
+    - ./data/submissions/submission.csv
