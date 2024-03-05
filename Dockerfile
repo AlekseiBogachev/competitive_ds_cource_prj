@@ -38,4 +38,7 @@ RUN poetry config installer.max-workers 10
 COPY poetry.lock pyproject.toml /$UNAME/comp_ds_prj/
 RUN poetry install --no-root
 
+COPY . .
+RUN poetry install
+
 CMD /bin/bash
