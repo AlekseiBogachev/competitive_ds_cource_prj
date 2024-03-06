@@ -17,6 +17,14 @@ RUN ./bin/installdependencies.sh
 
 USER runneruser
 
-RUN --mount=type=secret,id=token,uid=1200 ./config.sh --replace --unattended --url https://github.com/AlekseiBogachev/competitive_ds_cource_prj --token $(cat /run/secrets/token) -y
+RUN --mount=type=secret,id=token,uid=1200 \
+    ./config.sh \
+    --replace \
+    --unattended \
+    --name ubuntu-ds-runner \
+    --labels ubuntu,ds,no-gpu \
+    --ephemeral \
+    --url https://github.com/AlekseiBogachev/competitive_ds_cource_prj \
+    --token $(cat /run/secrets/token)
 
-CMD /bin/bash -c ./run.sh
+CMD ./run.sh

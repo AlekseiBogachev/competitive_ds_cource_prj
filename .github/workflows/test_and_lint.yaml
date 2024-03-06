@@ -13,7 +13,7 @@ env:
   GDRIVE_CREDENTIALS_DATA: ${{ secrets.DVC_GDRIVE_SECRET }}
 jobs:
   setup_environment:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
@@ -36,7 +36,7 @@ jobs:
         run: poetry config --list
 
   autoformatter:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: setup_environment
     permissions:
       contents: write
@@ -64,7 +64,7 @@ jobs:
           commit_message: Automated Change - sort imports
             
   test:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: [setup_environment, autoformatter]
     steps:
       - name: Checkout
@@ -85,7 +85,7 @@ jobs:
         run: echo There are no tests!
 
   flake:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: [setup_environment, autoformatter]
     continue-on-error: true
     steps:
@@ -107,7 +107,7 @@ jobs:
         run: poetry run nbqa flake8 ./notebooks/
 
   pydocstyle:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: [setup_environment, autoformatter]
     continue-on-error: true
     steps:
@@ -129,7 +129,7 @@ jobs:
         run: poetry run nbqa pydocstyle --match='(?!test_|__init__).*\.ipynb' ./notebooks/
 
   mypy:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: [setup_environment, autoformatter]
     continue-on-error: true
     steps:
