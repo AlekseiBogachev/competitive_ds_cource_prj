@@ -18,13 +18,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install --no-root
+          path: /runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install --no-root
 
       - name: Check Python version
         run: python --version
@@ -44,13 +45,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install
+          path: /runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
 
       - name: isort Python modules
         run: poetry run isort ./comp_ds_prj/
@@ -70,13 +72,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install
+          path: /runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
 
       - name: Pull data
         run: poetry run dvc pull
@@ -92,13 +95,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install
+          path: /runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
 
       - name: Check Python modules
         run: poetry run flake8 ./comp_ds_prj/
@@ -114,13 +118,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install
+          path: /runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
 
       - name: Check Python modules
         run: poetry run pydocstyle --match='(?!test_|__init__).*\.py' ./comp_ds_prj/
@@ -136,13 +141,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install
+          path: /runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
 
       - name: Check Python modules
         run: poetry run mypy ./comp_ds_prj/

@@ -1,0 +1,1 @@
+docker exec -it comp_ds_runner ./config.sh remove --token $(cat .secret_token)
