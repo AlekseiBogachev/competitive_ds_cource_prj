@@ -12,6 +12,7 @@ ARG GITEMAIL="bogachev.aleksey.m@gmail.com"
 RUN groupadd  --gid $UID $UNAME
 RUN useradd -g $GID -m -s /bin/bash -u $UID $UNAME
 
+
 RUN mkdir /home/$UNAME/actions-runner 
 WORKDIR /home/$UNAME/actions-runner
 
@@ -23,13 +24,15 @@ RUN chown -R $UNAME /home/$UNAME
 
 RUN ./bin/installdependencies.sh
 
+
 USER $UNAME
 
 RUN git config --global user.name $GITUSER
 RUN git config --global user.email $GITEMAIL
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
-ENV PATH="/$UNAME/.local/bin:/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV PATH="/home/$UNAME/.local/bin:/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
 
 WORKDIR /home/$UNAME/comp_ds_prj
 
@@ -37,6 +40,9 @@ RUN poetry config installer.max-workers 10
 
 COPY poetry.lock pyproject.toml /home/$UNAME/comp_ds_prj/
 RUN poetry install --no-root
+
+
+WORKDIR /home/$UNAME/actions-runner
 
 RUN --mount=type=secret,id=token,uid=$UID \
     ./config.sh \
@@ -47,7 +53,5 @@ RUN --mount=type=secret,id=token,uid=$UID \
     # --ephemeral \
     --url https://github.com/AlekseiBogachev/competitive_ds_cource_prj \
     --token $(cat /run/secrets/token)
-
-WORKDIR /home/$UNAME/actions-runner
 
 CMD ./run.sh

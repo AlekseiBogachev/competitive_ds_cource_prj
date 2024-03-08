@@ -14,5 +14,3 @@ docker run \
 -it \
 --name comp_ds_runner \
 self-hosted-runner
-
-docker image rm -f self-hosted-runner
