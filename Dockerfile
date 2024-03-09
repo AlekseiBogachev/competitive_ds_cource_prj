@@ -25,8 +25,8 @@ RUN useradd \
 
 USER $UNAME
 
-RUN git config --global user.name ${GITUSER}
-RUN git config --global user.email ${GITEMAIL}}
+RUN git config --global user.name $GITUSER
+RUN git config --global user.email $GITEMAIL
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="/$UNAME/.local/bin:/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"

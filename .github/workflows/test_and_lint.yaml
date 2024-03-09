@@ -13,18 +13,19 @@ env:
   GDRIVE_CREDENTIALS_DATA: ${{ secrets.DVC_GDRIVE_SECRET }}
 jobs:
   setup_environment:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install --no-root
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install --no-root
 
       - name: Check Python version
         run: python --version
@@ -36,7 +37,7 @@ jobs:
         run: poetry config --list
 
   autoformatter:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: setup_environment
     permissions:
       contents: write
@@ -44,13 +45,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
 
       - name: isort Python modules
         run: poetry run isort ./comp_ds_prj/
@@ -64,19 +66,20 @@ jobs:
           commit_message: Automated Change - sort imports
             
   test:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: [setup_environment, autoformatter]
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
 
       - name: Pull data
         run: poetry run dvc pull
@@ -85,20 +88,21 @@ jobs:
         run: echo There are no tests!
 
   flake:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: [setup_environment, autoformatter]
     continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
 
       - name: Check Python modules
         run: poetry run flake8 ./comp_ds_prj/
@@ -107,20 +111,21 @@ jobs:
         run: poetry run nbqa flake8 ./notebooks/
 
   pydocstyle:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: [setup_environment, autoformatter]
     continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
 
       - name: Check Python modules
         run: poetry run pydocstyle --match='(?!test_|__init__).*\.py' ./comp_ds_prj/
@@ -129,20 +134,21 @@ jobs:
         run: poetry run nbqa pydocstyle --match='(?!test_|__init__).*\.ipynb' ./notebooks/
 
   mypy:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: [setup_environment, autoformatter]
     continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Install poetry
-        run: pipx install poetry
-      - uses: actions/setup-python@v5.0.0
+      - name: Cache dependencies
+        uses: actions/cache@v4.0.1
         with:
-          python-version: '3.11'
-          cache: 'poetry'
-      - run: poetry install
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
+          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install dependencies
+        run: poetry install
 
       - name: Check Python modules
         run: poetry run mypy ./comp_ds_prj/
