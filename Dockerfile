@@ -28,11 +28,9 @@ RUN git config --global user.email ${GITEMAIL}
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="/${UNAME}/.local/bin:/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-
-WORKDIR /${UNAME}/comp_ds_prj
-
 RUN poetry config installer.max-workers 10
 
+WORKDIR /${UNAME}/comp_ds_prj
 COPY poetry.lock pyproject.toml /${UNAME}/comp_ds_prj/
 RUN poetry install --no-root
 
