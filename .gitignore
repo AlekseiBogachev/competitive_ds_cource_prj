@@ -96,3 +96,9 @@ target/
 
 # Google Drive
 /.gdrive/
+
+# Catboost
+/catboost_info/
+
+# Self-hosted runner for GitHub Actions
+/gh_actions_runner/.secret_token

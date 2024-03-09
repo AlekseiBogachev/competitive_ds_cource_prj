@@ -25,8 +25,8 @@ RUN useradd \
 
 USER $UNAME
 
-RUN git config --global user.name ${GITUSER}
-RUN git config --global user.email ${GITEMAIL}}
+RUN git config --global user.name $GITUSER
+RUN git config --global user.email $GITEMAIL
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="/$UNAME/.local/bin:/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -37,5 +37,8 @@ RUN poetry config installer.max-workers 10
 
 COPY poetry.lock pyproject.toml /$UNAME/comp_ds_prj/
 RUN poetry install --no-root
+
+COPY . .
+RUN poetry install
 
 CMD /bin/bash
