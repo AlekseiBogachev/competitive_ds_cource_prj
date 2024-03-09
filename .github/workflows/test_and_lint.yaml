@@ -21,7 +21,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4.0.1
         with:
-          path: /runneruser/.cache/pypoetry/virtualenvs
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
           key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
@@ -48,7 +48,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4.0.1
         with:
-          path: /runneruser/.cache/pypoetry/virtualenvs
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
           key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
@@ -75,7 +75,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4.0.1
         with:
-          path: /runneruser/.cache/pypoetry/virtualenvs
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
           key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
@@ -98,7 +98,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4.0.1
         with:
-          path: /runneruser/.cache/pypoetry/virtualenvs
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
           key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
@@ -121,7 +121,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4.0.1
         with:
-          path: /runneruser/.cache/pypoetry/virtualenvs
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
           key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
@@ -144,7 +144,7 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v4.0.1
         with:
-          path: /runneruser/.cache/pypoetry/virtualenvs
+          path: /home/runneruser/.cache/pypoetry/virtualenvs
           key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies

@@ -34,24 +34,10 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="/home/$UNAME/.local/bin:/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 
-WORKDIR /home/$UNAME/comp_ds_prj
-
 RUN poetry config installer.max-workers 10
 
-COPY poetry.lock pyproject.toml /home/$UNAME/comp_ds_prj/
+COPY poetry.lock pyproject.toml ./
 RUN poetry install --no-root
 
 
-WORKDIR /home/$UNAME/actions-runner
-
-RUN --mount=type=secret,id=token,uid=$UID \
-    ./config.sh \
-    --replace \
-    --unattended \
-    --name ubuntu-ds-runner \
-    --labels ubuntu,ds,no-gpu \
-    # --ephemeral \
-    --url https://github.com/AlekseiBogachev/competitive_ds_cource_prj \
-    --token $(cat /run/secrets/token)
-
-CMD ./run.sh
+CMD /bin/bash
