@@ -3,10 +3,12 @@
 ## Основная информация
 
 Данные состоят из несколько их файлов. Описание машин и информация о поломках собраны в следующих:
+
 - [`car_train.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/car_train.csv) - данные для обучения моделей;
 - [`car_test.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/car_test.csv) - данные для подготовки прогноза для соревнования;
 
 Опписание столбцов из `car_train.csv`, `car_test.csv`:
+
 - `car_id` - идентификатор машины;
 - `model` - марка;
 - `car_type` - класс;
@@ -21,17 +23,19 @@
 ## Дополнительная информация
 
 Дополнительные данныесодержатся в следующих файлах:
+
 - [`rides_info.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/rides_info.csv) - информация про поездки;
 - [`driver_info.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/driver_info.csv) - информация про водителей;
 - [`fix_info.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/fix_info.csv) - информация о ремонтах машин.
 
 Описание столбцов `rides_info.csv`:
+
 - `user_id` - идентификаторы водителя;
 - `car_id` - id машины;
 - `ride_id` - id поездки;
 - `ride_date` - дата поездки;
 - `rating` - рейтинг, поставленный водителем;
-- `ride_duration` - длительность (время) поездки; 
+- `ride_duration` - длительность (время) поездки;
 - `distance` - пройденное расстояние;
 - `ride_cost` - стоимость поездки;
 - `speed_avg` - средняя скорость поездки;
@@ -39,9 +43,10 @@
 - `stop_times` - количество остановок (паузы);
 - `refueling` - флаг, была ли дозаправка;
 - `user_ride_quality` - оценка манеры вождения в машины водителя, определенная скоринговой ML-системой сервиса;
-- `deviation_normal` - общий показатель датчиков о состоянии машины, относительно эталонных показателей (нормы). 
+- `deviation_normal` - общий показатель датчиков о состоянии машины, относительно эталонных показателей (нормы).
 
 Описание столбцов `driver_info.csv`:
+
 - `user_id` - идентификатор водителя;
 - `age` - возраст водителя;
 - `sex` - пол водителя;
@@ -51,6 +56,7 @@
 - `first_ride_date` - дата первой поездки.
 
 Описание столбцов `fix_info.csv`:
+
 - `worker_id` - идентификатор работника;
 - `car_id` - идентификатор машины;
 - `work_type` - тип проводимой работы;
