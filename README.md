@@ -25,8 +25,10 @@ $\log$ - натуральный логарифм.
 
 - Отчёты содержат подробное описание исследования и моделей и собраны в каталоге [reports](/reports/)
 - Документация, содержащая техническую информацию, собрана в каталоге [docs](/docs/)
-  - [Среда разработки, её развёртывание и запуск](/docs/development_environment.md)
-  - [CI/CD конвейер GihHub Actions](/docs/ci_cd_gh_actions.md)
+  - [Среда разработки](/docs/development_environment.md) - Сборка и запуск
+  среды разработки.
+  - [CI/CD конвейер GihHub Actions](/docs/ci_cd_gh_actions.md) - Сборка,
+  запуск и регистрация [self-hosted runner для GitHub Actions](https://docs.github.com/en/actions/hosting-your-own-runners).
 
 ## Структура репозитория
 
