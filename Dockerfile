@@ -2,8 +2,8 @@ ARG PYTHON_VERSION=3.11
 FROM python:${PYTHON_VERSION}
 
 ARG UNAME=dockeruser
-ARG UID=1000
-ARG GID=1000
+ARG UID=1001
+ARG GID=1001
 ARG GITUSER="Aleksei Bogachev"
 ARG GITEMAIL="bogachev.aleksey.m@gmail.com"
 
@@ -33,8 +33,5 @@ RUN poetry config installer.max-workers 10
 WORKDIR /${UNAME}/comp_ds_prj
 COPY poetry.lock pyproject.toml /${UNAME}/comp_ds_prj/
 RUN poetry install --no-root
-
-COPY . .
-RUN poetry install
 
 CMD /bin/bash
