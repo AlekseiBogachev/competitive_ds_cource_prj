@@ -36,7 +36,7 @@ jobs:
 
   autoformatter:
     runs-on: [self-hosted,ubuntu,ds,no-gpu]
-    needs: setup_environment
+    needs: check_environment
     permissions:
       contents: write
     steps:
@@ -59,7 +59,7 @@ jobs:
             
   test:
     runs-on: [self-hosted,ubuntu,ds,no-gpu]
-    needs: [setup_environment, autoformatter]
+    needs: [check_environment, autoformatter]
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
@@ -75,7 +75,7 @@ jobs:
 
   flake:
     runs-on: [self-hosted,ubuntu,ds,no-gpu]
-    needs: [setup_environment, autoformatter]
+    needs: [check_environment, autoformatter]
     continue-on-error: true
     steps:
       - name: Checkout
@@ -92,7 +92,7 @@ jobs:
 
   pydocstyle:
     runs-on: [self-hosted,ubuntu,ds,no-gpu]
-    needs: [setup_environment, autoformatter]
+    needs: [check_environment, autoformatter]
     continue-on-error: true
     steps:
       - name: Checkout
@@ -109,7 +109,7 @@ jobs:
 
   mypy:
     runs-on: [self-hosted,ubuntu,ds,no-gpu]
-    needs: [setup_environment, autoformatter]
+    needs: [check_environment, autoformatter]
     continue-on-error: true
     steps:
       - name: Checkout
