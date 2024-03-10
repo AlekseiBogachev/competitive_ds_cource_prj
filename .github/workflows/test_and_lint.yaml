@@ -4,7 +4,6 @@ on:
   push:
     branches-ignore:
       - docs
-      - docker
   pull_request:
     branches:
       - main
@@ -12,17 +11,11 @@ env:
   POETRY_INSTALLER_MAX_WORKERS: 10
   GDRIVE_CREDENTIALS_DATA: ${{ secrets.DVC_GDRIVE_SECRET }}
 jobs:
-  setup_environment:
+  check_environment:
     runs-on: [self-hosted,ubuntu,ds,no-gpu]
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
-
-      - name: Cache dependencies
-        uses: actions/cache@v4.0.1
-        with:
-          path: /home/runneruser/.cache/pypoetry/virtualenvs
-          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
         run: poetry install --no-root
@@ -36,6 +29,11 @@ jobs:
       - name: Poetry check configs
         run: poetry config --list
 
+      - name: Check DVC version
+        run: |
+          echo DVC version: 
+          poetry run dvc --version
+
   autoformatter:
     runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: setup_environment
@@ -44,12 +42,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
-
-      - name: Cache dependencies
-        uses: actions/cache@v4.0.1
-        with:
-          path: /home/runneruser/.cache/pypoetry/virtualenvs
-          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
         run: poetry install
@@ -72,12 +64,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Cache dependencies
-        uses: actions/cache@v4.0.1
-        with:
-          path: /home/runneruser/.cache/pypoetry/virtualenvs
-          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
-
       - name: Install dependencies
         run: poetry install
 
@@ -94,12 +80,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
-
-      - name: Cache dependencies
-        uses: actions/cache@v4.0.1
-        with:
-          path: /home/runneruser/.cache/pypoetry/virtualenvs
-          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
         run: poetry install
@@ -118,12 +98,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.1.1
 
-      - name: Cache dependencies
-        uses: actions/cache@v4.0.1
-        with:
-          path: /home/runneruser/.cache/pypoetry/virtualenvs
-          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
-
       - name: Install dependencies
         run: poetry install
 
@@ -140,12 +114,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
-
-      - name: Cache dependencies
-        uses: actions/cache@v4.0.1
-        with:
-          path: /home/runneruser/.cache/pypoetry/virtualenvs
-          key: poetry-deps-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install dependencies
         run: poetry install
