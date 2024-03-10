@@ -80,9 +80,9 @@ $\log$ - натуральный логарифм.
   
 ### Схема данных
 
-![ER-диаграмма](reports/figures/er_diag.svg)
+![ER-диаграмма](docs/figures/er_diag.svg)
 
-## Project Organization
+## Структура репозитория
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
@@ -131,8 +131,3 @@ $\log$ - натуральный логарифм.
     │       └── visualize.py
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
-
-
---------
-
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
