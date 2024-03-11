@@ -8,7 +8,7 @@
 
 Укрупнённо основные этапы CI/CD приведены на диаграмме ниже. На диаграмме для
 каждого этапа подписан его job из
-[test_and_lint.yaml](.github/workflows/test_and_lint.yaml).
+[test_and_lint.yaml](/.github/workflows/test_and_lint.yaml).
 
 ![Этапы ci/cd](/docs/figures/cicd_stages.svg)
 
