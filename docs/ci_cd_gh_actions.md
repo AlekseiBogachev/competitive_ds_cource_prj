@@ -3,7 +3,7 @@
 ## Основные шаги
 
 Описание CI/CD конвейера находится в файле
-[/.github/workflows/test_and_lint.yaml](.github/workflows/test_and_lint.yaml)
+[/.github/workflows/test_and_lint.yaml](/.github/workflows/test_and_lint.yaml)
 (каталог проекта считать корневым).
 
 Укрупнённо основные этапы CI/CD приведены на диаграмме ниже. На диаграмме для
