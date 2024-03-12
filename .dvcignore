@@ -1,3 +1,12 @@
 # Add patterns of files dvc should ignore, which could improve
 # the performance. Learn more at
 # https://dvc.org/doc/user-guide/dvcignore
+
+# DotEnv configuration
+.env
+
+# Google Drive
+/.gdrive/
+
+# Self-hosted runner for GitHub Actions
+/gh_actions_runner/.secret_token
