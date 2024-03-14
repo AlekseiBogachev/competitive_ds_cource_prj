@@ -25,6 +25,7 @@ optuna = "^3.5.0"
 shap = "^0.44.1"
 category-encoders = "^2.6.3"
 kaggle = "^1.6.6"
+missingno = "^0.5.2"
 
 
 [tool.poetry.group.dev.dependencies]
