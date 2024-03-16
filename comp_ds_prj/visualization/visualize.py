@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """Визуализации и вывод информации об объектах."""
 
-from IPython.display import display
 import matplotlib.pyplot as plt
 import missingno as msno
 import pandas as pd
+from IPython.display import display
 
 
 def review_data(df: pd.DataFrame, n_rows: int = 10) -> None:
