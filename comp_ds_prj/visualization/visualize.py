@@ -177,7 +177,9 @@ def explore_cat_feature(
     return None
 
 
-def plot_num_feature_distibs(data: pd.DataFrame, column_name: str) -> None:
+def plot_num_feature_distibs(
+    data: pd.DataFrame, column_name: str, bins: int = 23
+) -> None:
     """Выводит графики, характеризующие распределение значений признака.
 
     Выводит на экран гистограмму с KDE, диаграмму размаха и ECDF для признака
@@ -189,6 +191,8 @@ def plot_num_feature_distibs(data: pd.DataFrame, column_name: str) -> None:
         Датафрейм, содержащий исследуемый признак.
     column_name : str
         Имя признака (столбца датафрейма data).
+    bins: int
+        Количество корзин на гистограмме. Значение по умолчанию 23.
     """
     fig, ax = plt.subplot_mosaic(
         [['hist', 'ecdf'], ['box',  'ecdf']],
@@ -202,7 +206,7 @@ def plot_num_feature_distibs(data: pd.DataFrame, column_name: str) -> None:
         ax=ax['hist'],
         stat='density',
         kde=True,
-        bins=30,
+        bins=bins,
     )
     sns.ecdfplot(data=data, x=column_name, ax=ax['ecdf'], stat='proportion')
     sns.boxplot(data=data, x=column_name, ax=ax['box'])
@@ -227,7 +231,9 @@ def plot_num_feature_distibs(data: pd.DataFrame, column_name: str) -> None:
     return None
 
 
-def explore_num_feature(data: pd.DataFrame, column_name: str) -> None:
+def explore_num_feature(
+    data: pd.DataFrame, column_name: str, bins: int = 23
+) -> None:
     """Выводит информацию о разспределении значений количественного признака.
 
     Выводит информацию о разспределении значений количественного признака
@@ -242,6 +248,8 @@ def explore_num_feature(data: pd.DataFrame, column_name: str) -> None:
         Датафрейм, содержащий исследуемый признак.
     column_name : str
         Имя признака (столбца датафрейма data).
+    bins: int
+        Количество корзин на гистограмме. Значение по умолчанию 23.
     """
     print(f"Признак {column_name}")
     na_counts: int = data[column_name].isna().sum()
@@ -254,6 +262,6 @@ def explore_num_feature(data: pd.DataFrame, column_name: str) -> None:
         data[[column_name]].describe(percentiles=[0.1, 0.25, 0.5, 0.75, 0.9])
     )
 
-    plot_num_feature_distibs(data, column_name)
+    plot_num_feature_distibs(data, column_name, bins)
 
     return None
