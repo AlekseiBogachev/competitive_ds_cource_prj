@@ -36,6 +36,7 @@ pydocstyle = "^6.3.0"
 mypy = "^1.8.0"
 isort = "^5.13.2"
 pandas-stubs = "^2.2.0.240218"
+types-seaborn = "^0.13.2.20240311"
 
 [build-system]
 requires = ["poetry-core"]
