@@ -265,3 +265,46 @@ def explore_num_feature(
     plot_num_feature_distibs(data, column_name, bins)
 
     return None
+
+
+def num_vs_cat_boxplots(
+    data: pd.DataFrame,
+    cat_feature: str,
+    num_feature: str,
+    **kwargs: Any,
+) -> None:
+    """Строит диаграммы размаха признака num_feature в разрезе cat_feature.
+
+    Строит диаграммы размаха признака num_feature в разрезе cat_feature и
+    формирует заголовок вида "Диаграммы размаха признака {num_feature} в разрезе
+    признака {cat_feature} . В функцию можно передать параметры графика,
+    корректные для метода pd.DataFrame.boxplot() с помощью именованных
+    аргументов **kwargs.
+
+    Parameters
+    ----------
+    data : pd.DataFrame
+        Датафрейм, содержащий исследуемый признак.
+    cat_feature : str
+        Имя категориального признака в разрезе которого будут построены
+        диаграммы размаха количественного признака.
+    num_feature : str
+        Имя количественного признака, для которого будут построены диаграммы
+        размаха.
+    **kwargs : Any, optional
+        Параметры графика, корректные для метода pd.DataFrame.boxplot().
+    """
+    data.boxplot(
+        column=num_feature,
+        by=cat_feature,
+        **kwargs,
+    )
+
+    plt.title(
+        f"Диаграммы размаха признака {num_feature} в разрезе "
+        f"признака {cat_feature}"
+    )
+
+    plt.suptitle("")
+
+    return None
