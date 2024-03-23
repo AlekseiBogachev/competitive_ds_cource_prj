@@ -391,12 +391,20 @@ def explore_cat_vs_cat(
         Параметры графика, корректные для функции cat_vs_cat_scatter().
         Позволяет переопределить аналогичные параметры, заданные по умолчанию.
     """
-    plot_params: Dict[str, Any] = {"title": title}
+    plot_params: Dict[str, Any] = {
+        "title": title,
+        "cmap": 'winter',
+    }
     plot_params.update(**kwargs)
 
     print(plot_params["title"])
 
-    display(pd.crosstab(data[x], data[y]))
+    display(
+        pd
+        .crosstab(data[x], data[y])
+        .style
+        .text_gradient(cmap=plot_params["cmap"], axis=None)
+    )
 
     print()
 
