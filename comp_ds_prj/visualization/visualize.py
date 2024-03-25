@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Визуализации и вывод информации об объектах."""
 
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable, Dict, List, Tuple, Union
 
 import matplotlib.pyplot as plt
 import missingno as msno
@@ -462,3 +462,83 @@ def num_vs_cat_boxplots(
     plt.suptitle("")
 
     return None
+
+
+def num_vs_num_scatterhexbin(
+    data: pd.DataFrame,
+    x: str,
+    y: str,
+    title: str,
+    xlabel: str,
+    ylabel: str,
+    scatter_alpha: float = 0.1,
+    scatter_s: Union[int, None] = None,
+    hexbin_gridsize: int = 100,
+    figsize: Tuple[int, int] = (18, 6),
+) -> None:
+    """Строит график, характеризующий взаимосвязь двух количественных признаков.
+
+    Выводит на экран два графика, характеризующих взаимосвязь двух
+    количественных признаков: диаграмму рассеяния
+    (pd.DataFrame.plot(kind="scatter")) и hexbin-plot (plt.hexbin()) с тепловой
+    картой, характерезующий количество наблюдений в каждой корзине. На каждом
+    график по горизонтальной оси отложены значения признака x датафрейма data,
+    по вертикальной оси - значения признака у датафрейма data.
+
+    Parameters
+    ----------
+    data : pd.DataFrame
+        Датафрейм, содержащий исследуемые признаки.
+    x : str
+        Имя признака (название столбца data), который будет отложен по оси X.
+    y : str
+        Имя признака (название столбца data), который будет отложен по оси Y.
+    title : str
+        Заголовок графика (suptitle).
+    xlabel : str
+        Название оси X.
+    ylabel : str
+        Название оси y.
+    scatter_alpha : float, optional
+        Прозрачность точек на диаграмме рассеяния. Аналогичен аргументу alpha
+        метода pd.DataFrame.plot.scatter(). Значение по умолчанию 0.1.
+    scatter_s : Union[int, None], optional
+        Размер точек на диаграмме рассеяния.Аналогичен аргументу s
+        метода pd.DataFrame.plot.scatter(). Значение по умолчанию None.
+    hexbin_gridsize : int, optional
+        Размер шестиугольника на hexbin, соответствует аргументу gridsize
+        метода plt.hexbin(). Значение по умолчанию 100.
+    figsize : Tuple[int, int], optional
+        Размер всего графика с двумя подграфиками. Значение по умолчанию
+        (18, 6).
+    """
+    fig, (ax0, ax1) = plt.subplots(
+        ncols=2, figsize=figsize, gridspec_kw={"width_ratios": [3, 4]}
+    )
+
+    fig.suptitle(title)
+
+    data.plot(
+        kind="scatter",
+        x=x,
+        y=y,
+        xlabel=xlabel,
+        ylabel=ylabel,
+        title="Диаграмма рассеяния",
+        alpha=scatter_alpha,
+        s=scatter_s,
+        grid=True,
+        ax=ax0
+    )
+
+    hb = ax1.hexbin(
+        data[x], data[y], gridsize=hexbin_gridsize, cmap='Blues', mincnt=1
+    )
+    ax1.set_xlabel(xlabel)
+    ax1.set_ylabel(ylabel)
+    ax1.set_title("Hexbin-plot")
+    fig.colorbar(hb, ax=ax1, label='Количество')
+
+    plt.show()
+
+    return
