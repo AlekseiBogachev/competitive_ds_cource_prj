@@ -7,6 +7,7 @@ from comp_ds_prj.visualization.visualize import (
     explore_num_feature,
     num_vs_cat_boxplots,
     num_vs_num_scatterhexbin,
+    plot_corr_matrix,
     plot_hbar,
     plot_num_feature_distibs,
     review_data,

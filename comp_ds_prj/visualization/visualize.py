@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Визуализации и вывод информации об объектах."""
+"""Вывод и визуализации информации о данных."""
 
-from typing import Any, Callable, Dict, List, Tuple, Union
+from typing import Any, Callable, Dict, List, Literal, Tuple, Union
 
 import matplotlib.pyplot as plt
 import missingno as msno
@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from IPython.display import display
+from matplotlib.colors import LinearSegmentedColormap
 
 
 def review_data(df: pd.DataFrame, n_rows: int = 10) -> None:
@@ -196,7 +197,7 @@ def plot_num_feature_distibs(
         Количество корзин на гистограмме. Значение по умолчанию 23.
     """
     fig, ax = plt.subplot_mosaic(
-        [['hist', 'ecdf'], ['box',  'ecdf']],
+        [["hist", "ecdf"], ["box",  "ecdf"]],
         figsize=(12, 6),
         gridspec_kw=dict(width_ratios=[2, 1], height_ratios=[2, 1])
     )
@@ -204,23 +205,23 @@ def plot_num_feature_distibs(
     sns.histplot(
         data=data,
         x=column_name,
-        ax=ax['hist'],
-        stat='density',
+        ax=ax["hist"],
+        stat="density",
         kde=True,
         bins=bins,
     )
-    sns.ecdfplot(data=data, x=column_name, ax=ax['ecdf'], stat='proportion')
-    sns.boxplot(data=data, x=column_name, ax=ax['box'])
+    sns.ecdfplot(data=data, x=column_name, ax=ax["ecdf"], stat="proportion")
+    sns.boxplot(data=data, x=column_name, ax=ax["box"])
 
-    plt.suptitle(f'Распределение значений признака {column_name}')
+    plt.suptitle(f"Распределение значений признака {column_name}")
 
-    ax['hist'].set_title('Гистограмма и KDE')
-    ax['hist'].set_ylabel('Плотность вероятноти')
-    ax['hist'].set_xlabel('')
+    ax["hist"].set_title("Гистограмма и KDE")
+    ax["hist"].set_ylabel("Плотность вероятноти")
+    ax["hist"].set_xlabel("")
 
-    ax['ecdf'].set_title('ECDF')
-    ax['ecdf'].set_ylabel('Доля значений')
-    ax['ecdf'].tick_params(axis='x', rotation=45)
+    ax["ecdf"].set_title("ECDF")
+    ax["ecdf"].set_ylabel("Доля значений")
+    ax["ecdf"].tick_params(axis="x", rotation=45)
 
     for axes in ax:
         ax[axes].grid()
@@ -288,8 +289,8 @@ def cat_vs_cat_scatter(
     Параметры графика по умолчанию:
     xlabel=x
     ylabel=y
-    c='Количество'
-    cmap='winter'
+    c="Количество"
+    cmap="winter"
     alpha=0.4
     grid=True
     rot=-90
@@ -316,8 +317,8 @@ def cat_vs_cat_scatter(
     plotparams: Dict[str, Any] = dict(
         xlabel=x,
         ylabel=y,
-        c='Количество',
-        cmap='winter',
+        c="Количество",
+        cmap="winter",
         alpha=0.4,
         grid=True,
         rot=-90,
@@ -335,9 +336,9 @@ def cat_vs_cat_scatter(
     y_ids: Dict[str, int] = {cat: i for i, cat in enumerate(y_cats)}
 
     df: pd.DataFrame = data[[x, y]].copy()
-    df['x_vals'] = add_jitter(df[x].replace(x_ids))
-    df['y_vals'] = add_jitter(df[y].replace(y_ids))
-    df['Количество'] = df.groupby([x, y]).x_vals.transform('count')
+    df["x_vals"] = add_jitter(df[x].replace(x_ids))
+    df["y_vals"] = add_jitter(df[y].replace(y_ids))
+    df["Количество"] = df.groupby([x, y]).x_vals.transform("count")
 
     df.plot(
         kind="scatter",
@@ -393,7 +394,7 @@ def explore_cat_vs_cat(
     """
     plot_params: Dict[str, Any] = {
         "title": title,
-        "cmap": 'winter',
+        "cmap": "winter",
     }
     plot_params.update(**kwargs)
 
@@ -532,13 +533,101 @@ def num_vs_num_scatterhexbin(
     )
 
     hb = ax1.hexbin(
-        data[x], data[y], gridsize=hexbin_gridsize, cmap='Blues', mincnt=1
+        data[x], data[y], gridsize=hexbin_gridsize, cmap="Blues", mincnt=1
     )
     ax1.set_xlabel(xlabel)
     ax1.set_ylabel(ylabel)
     ax1.set_title("Hexbin-plot")
-    fig.colorbar(hb, ax=ax1, label='Количество')
+    fig.colorbar(hb, ax=ax1, label="Количество")
 
     plt.show()
 
     return
+
+
+def plot_corr_matrix(
+    data: pd.DataFrame,
+    columns: Union[List[str], None] = None,
+    method: Literal["pearson", "kendall", "spearman"] = "pearson",
+    numeric_only: bool = True,
+    annot: bool = True,
+    figsize: Tuple[int, int] = (7, 7),
+    vmin: float = -1,
+    vmax: float = 1,
+    rot: int = 0,
+) -> None:
+    """Выводит матрицу корреляции. Игнорирует пустые значения (NA/null).
+
+    Parameters
+    ----------
+    data : pd.DataFrame
+        Датафрейм с данными, для которых будут расчитаны коэффициенты
+        корреляции.
+    columns : Union[List[str], None], optional
+        Столбцы датафрейма data, для которых будет построена матрица корреляции,
+        если None, то матрица корреляции будет построена для всех столбцов с
+        числовыми типами. Значение по умолчанию None.
+    method : {"pearson", "kendall", "spearman"}, optional
+        Метод по которому будут расчитываться коэффициенты корреляции. Допустимы
+        следующие значения:
+        "pearson" - коэффициент корреляции Пирсона,
+        "kendall" - коэффициент корреляции Кендалла,
+        "spearman" - коэффициент ранговой корреляции Спирмена.
+        Значение по умолчанию "pearson".
+    numeric_only : bool, optional
+        Если True корреляция вычисляется только для количественных и логических
+        значений. Соответствует параметру numeric_only метода
+        pd.DataFrame.corr(). Значение по умолчанию True.
+    annot : bool, optional
+        Если True, то в матрице корреляции для каждой пары признаков будут
+        указаны значения коэффициента корреляции. Значение по умолчанию True.
+    figsize : Tuple[int, int], optional
+        Размер графика, значение по умолчанию (7, 7)
+    vmin : float, optional
+        Минимальное значение коэффициента корреляции, имеющее собственный цевет
+        на тепловой карте. Значение по умолчанию -1. Соответствует параметру
+        vmin функции sns.heatmap()
+    vmax : float, optional
+        Максимальное значение коэффициента корреляции, имеющее собственный цевет
+        на тепловой карте. Значение по умолчанию 1. Соответствует параметру
+        vmax функции sns.heatmap()
+    rot : int, optional
+        Угол на который повёрныты подписи значений осей.
+        Значение по умолчанию 0.
+    """
+    cols: List[str] = data.columns.tolist()
+    if columns is not None:
+        cols = columns
+
+    corr: pd.DataFrame = data[cols].corr(
+        method=method, numeric_only=numeric_only
+    )
+
+    mask: np.ndarray = np.triu(np.ones_like(corr, dtype=bool))
+
+    f, ax = plt.subplots(figsize=figsize)
+
+    cmap: LinearSegmentedColormap = sns.diverging_palette(230, 20, as_cmap=True)
+
+    ax = sns.heatmap(
+        corr,
+        mask=mask,
+        cmap=cmap,
+        annot=annot,
+        vmax=vmax,
+        vmin=vmin,
+        center=0,
+        square=True,
+        linewidths=1,
+        cbar_kws=dict(shrink=0.5),
+        ax=ax,
+    )
+
+    ax.set_title("Матрица корреляции")
+
+    ax.set_yticklabels(ax.get_yticklabels(), rotation=rot)
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=90 - rot)
+
+    plt.show()
+
+    return None
