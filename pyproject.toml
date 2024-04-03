@@ -25,6 +25,7 @@ optuna = "^3.5.0"
 shap = "^0.44.1"
 category-encoders = "^2.6.3"
 kaggle = "^1.6.6"
+missingno = "^0.5.2"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -35,6 +36,7 @@ pydocstyle = "^6.3.0"
 mypy = "^1.8.0"
 isort = "^5.13.2"
 pandas-stubs = "^2.2.0.240218"
+types-seaborn = "^0.13.2.20240311"
 
 [build-system]
 requires = ["poetry-core"]
@@ -61,6 +63,7 @@ warn_unused_configs = true
 module = [
     "catboost",
     "joblib",
+    "missingno",
     "sklearn",
     "sklearn.metrics",
     "sklearn.model_selection"
