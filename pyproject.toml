@@ -44,15 +44,31 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 
-[tool.black]
-line_length = 80
+[tool.ruff]
+extend-include = ["*.ipynb"]
+extend-exclude = ["references/*"]
+indent-width = 4
+line-length = 80
+target-version = "py311"
 
+[tool.ruff.lint]
+select = ["D", "E", "F", "I", "W"]
+ignore = ["D301", "E731"]
+fixable = ["F401", "I001", "W291", "W292", "W293"]
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-line_length = 80
-include_trailing_comma = true
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "D104"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint.isort]
+force-wrap-aliases = true
+combine-as-imports = true
 
 
 [tool.mypy]
@@ -70,8 +86,3 @@ module = [
     "sklearn.model_selection"
 ]
 ignore_missing_imports = true
-
-
-[tool.pydocstyle]
-convention = "numpy"
-add_ignore = "D301"
