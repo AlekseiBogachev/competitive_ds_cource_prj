@@ -31,7 +31,7 @@ ENV PATH="/${UNAME}/.local/bin:/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/l
 RUN poetry config installer.max-workers 10
 
 WORKDIR /${UNAME}/comp_ds_prj
-COPY poetry.lock pyproject.toml /${UNAME}/comp_ds_prj/
+COPY poetry.loc[k] pyproject.toml /${UNAME}/comp_ds_prj/
 RUN poetry install --no-root
 
 CMD /bin/bash
