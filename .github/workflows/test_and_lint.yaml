@@ -78,6 +78,20 @@ jobs:
       - name: Print number of tests
         run: echo There are no tests!
 
+  ruff_check:
+    runs-on: [self-hosted,ubuntu,ds,no-gpu]
+    needs: [check_environment, autoformatter]
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Check Python modules
+        run: poetry run ruff check
+
   mypy:
     runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: [check_environment, autoformatter]
