@@ -15,24 +15,21 @@ project_dir: Path = Path(__file__).resolve().parents[2]
 
 @click.command()
 @click.argument(
-    'car_train_filepath',
+    "car_train_filepath",
     type=click.Path(exists=True),
 )
-@click.argument(
-    'rides_info_filepath',
-    type=click.Path(exists=True)
-)
+@click.argument("rides_info_filepath", type=click.Path(exists=True))
 @click.option(
-    '-o', '--output', 'output_filepath',
-    default=Path.joinpath(project_dir, 'data', 'interim', 'raw_dataset.csv'),
+    "-o",
+    "--output",
+    "output_filepath",
+    default=Path.joinpath(project_dir, "data", "interim", "raw_dataset.csv"),
     type=click.Path(),
-    help='Имя файла, в который будет сохранён результирующий датасет.'
-         'Значение по умолчанию <project_dir>/data/interim/raw_dataset.csv',
+    help="Имя файла, в который будет сохранён результирующий датасет."
+    "Значение по умолчанию <project_dir>/data/interim/raw_dataset.csv",
 )
 def combine_data(
-    car_train_filepath: str,
-    rides_info_filepath: str,
-    output_filepath: str
+    car_train_filepath: str, rides_info_filepath: str, output_filepath: str
 ) -> None:
     """Собирает все файлы с исходными данными в один.
 
@@ -59,45 +56,43 @@ def combine_data(
         Имя файла, в который будет сохранён результирующий датасет.
         Значение по умолчанию <project_dir>/data/interim/raw_dataset.csv
     """
-    logger.info('Объединение исходных в единый датафрейм')
+    logger.info("Объединение исходных в единый датафрейм")
 
     logger.info(
-        'Читение датафрейма с описанием машин и информацией о поломках '
-        f'{car_train_filepath}'
+        "Читение датафрейма с описанием машин и информацией о поломках "
+        f"{car_train_filepath}"
     )
     car_train: pd.DataFrame = pd.read_csv(car_train_filepath)
 
     logger.info(
-        f'Читение датафрейма с информацией о поездках {car_train_filepath}'
+        f"Читение датафрейма с информацией о поездках {car_train_filepath}"
     )
     rides_info: pd.DataFrame = pd.read_csv(rides_info_filepath)
 
-    rides_df_gr: pd.DataFrame = (
-        rides_info
-        .groupby('car_id', as_index=False)
-        .agg(
-            mean_rating=('rating', 'mean'),
-            istance_sum=('distance', 'sum'),
-            rating_min=('rating', 'min'),
-            speed_max=('speed_max', 'max'),
-            user_ride_quality_median=('user_ride_quality', 'median'),
-            deviation_normal_count=('deviation_normal', 'count'),
-            user_uniq=('user_id', lambda x: x.nunique())
-        )
+    rides_df_gr: pd.DataFrame = rides_info.groupby(
+        "car_id", as_index=False
+    ).agg(
+        mean_rating=("rating", "mean"),
+        istance_sum=("distance", "sum"),
+        rating_min=("rating", "min"),
+        speed_max=("speed_max", "max"),
+        user_ride_quality_median=("user_ride_quality", "median"),
+        deviation_normal_count=("deviation_normal", "count"),
+        user_uniq=("user_id", lambda x: x.nunique()),
     )
 
-    logger.info('Объединение данных')
+    logger.info("Объединение данных")
     dataset: pd.DataFrame = car_train.merge(
         rides_df_gr,
-        on='car_id',
-        how='left',
+        on="car_id",
+        how="left",
     )
 
-    logger.info(f'Запись датасета в файл {output_filepath}')
+    logger.info(f"Запись датасета в файл {output_filepath}")
     dataset.to_csv(output_filepath, index=False)
 
     return None
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     combine_data()

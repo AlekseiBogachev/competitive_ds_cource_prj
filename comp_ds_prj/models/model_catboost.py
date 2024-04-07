@@ -81,7 +81,7 @@ def train(input_filepath: str, output_filepath: str) -> None:
     logger.info(f"Количественные признаки: {num_features}")
 
     data: List[np.ndarray] = train_test_split(
-        X.drop(columns='car_id'), y, test_size=0.2, random_state=42
+        X.drop(columns="car_id"), y, test_size=0.2, random_state=42
     )
     X_train, X_test, y_train, y_test = data
 
@@ -90,7 +90,7 @@ def train(input_filepath: str, output_filepath: str) -> None:
         f"Количество наблюдений в валидациооном множества {len(X_test)}."
     )
 
-    logger.info('Инициализация классификатора')
+    logger.info("Инициализация классификатора")
 
     clf: catboost.core.CatBoostClassifier = CatBoostClassifier(
         cat_features=cat_features
@@ -133,7 +133,9 @@ def train(input_filepath: str, output_filepath: str) -> None:
     "--model",
     "model_filepath",
     default=Path.joinpath(
-        project_dir, "model", "catboost.joblib",
+        project_dir,
+        "model",
+        "catboost.joblib",
     ),
     type=click.Path(exists=True),
     help="Имя файла с сохраненной моделью. Значение по умолчанию"
@@ -144,10 +146,13 @@ def train(input_filepath: str, output_filepath: str) -> None:
     "--output",
     "output_filepath",
     default=Path.joinpath(
-        project_dir, "data", "submissions", "submission.csv",
+        project_dir,
+        "data",
+        "submissions",
+        "submission.csv",
     ),
     help="Имя файла с подготовленным прогнозом. Значение по умолчанию"
-         "<project_dir>/data/submissions/submission.csv",
+    "<project_dir>/data/submissions/submission.csv",
 )
 def predict(
     input_filepath: str,
@@ -189,13 +194,13 @@ def predict(
     submission: pd.DataFrame = pd.read_csv(input_filepath)
 
     logger.info("Подготовка прогноза.")
-    submission["target_class"] = clf.predict(submission.drop(columns='car_id'))
+    submission["target_class"] = clf.predict(submission.drop(columns="car_id"))
 
     logger.info(f"Сохранение результата в {output_filepath}.")
     (
-        submission
-        .loc[:, ["car_id", "target_class"]]
-        .to_csv(output_filepath, index=False)
+        submission.loc[:, ["car_id", "target_class"]].to_csv(
+            output_filepath, index=False
+        )
     )
 
     return None

@@ -58,12 +58,11 @@ def review_data(df: pd.DataFrame, n_rows: int = 10) -> None:
             print("Описательные статистики для числовых признаков:")
             display(
                 (
-                    df
-                    .describe(
+                    df.describe(
                         include=["number"],
-                        percentiles=[0.1, 0.25, 0.5, 0.75, 0.9]
-                    )
-                    .transpose())
+                        percentiles=[0.1, 0.25, 0.5, 0.75, 0.9],
+                    ).transpose()
+                )
             )
         except ValueError:
             print("Числовые признаки отсутствуют.")
@@ -104,22 +103,19 @@ def count_vals(df: pd.DataFrame, name: str) -> None:
         "display.max_columns", None, "display.max_rows", None
     ):
         display(
-            df
-            [[name]]
+            df[[name]]
             .value_counts(dropna=False)
             .reset_index()
             .rename(
                 columns={
                     name: f"Значение признака {name}",
-                    0: "Количество повторений"
+                    0: "Количество повторений",
                 }
             )
         )
 
 
-def plot_hbar(
-    data: pd.DataFrame, column_name: str, **kwargs: Any
-) -> None:
+def plot_hbar(data: pd.DataFrame, column_name: str, **kwargs: Any) -> None:
     """Строит горизонтальную столбчатую диаграмму.
 
     Строит горизонтальную столбчатую диаграмму категориального признака
@@ -136,12 +132,7 @@ def plot_hbar(
     **kwargs : Any, optional
         Параметры графика, корректные для метода pd.DataFrame.plot.
     """
-    df: pd.Series = (
-        data
-        [column_name]
-        .value_counts(dropna=False)
-        .sort_values()
-    )
+    df: pd.Series = data[column_name].value_counts(dropna=False).sort_values()
 
     df.plot(kind="barh", **kwargs)
     plt.show()
@@ -197,9 +188,9 @@ def plot_num_feature_distibs(
         Количество корзин на гистограмме. Значение по умолчанию 23.
     """
     fig, ax = plt.subplot_mosaic(
-        [["hist", "ecdf"], ["box",  "ecdf"]],
+        [["hist", "ecdf"], ["box", "ecdf"]],
         figsize=(12, 6),
-        gridspec_kw=dict(width_ratios=[2, 1], height_ratios=[2, 1])
+        gridspec_kw=dict(width_ratios=[2, 1], height_ratios=[2, 1]),
     )
 
     sns.histplot(
@@ -340,12 +331,7 @@ def cat_vs_cat_scatter(
     df["y_vals"] = add_jitter(df[y].replace(y_ids))
     df["Количество"] = df.groupby([x, y]).x_vals.transform("count")
 
-    df.plot(
-        kind="scatter",
-        x="x_vals",
-        y="y_vals",
-        **plotparams
-    )
+    df.plot(kind="scatter", x="x_vals", y="y_vals", **plotparams)
 
     plt.xticks(list(x_ids.values()))
     plt.gca().set_xticklabels(x_ids.keys())
@@ -401,10 +387,9 @@ def explore_cat_vs_cat(
     print(plot_params["title"])
 
     display(
-        pd
-        .crosstab(data[x], data[y])
-        .style
-        .text_gradient(cmap=plot_params["cmap"], axis=None)
+        pd.crosstab(data[x], data[y]).style.text_gradient(
+            cmap=plot_params["cmap"], axis=None
+        )
     )
 
     print()
@@ -529,7 +514,7 @@ def num_vs_num_scatterhexbin(
         alpha=scatter_alpha,
         s=scatter_s,
         grid=True,
-        ax=ax0
+        ax=ax0,
     )
 
     hb = ax1.hexbin(
