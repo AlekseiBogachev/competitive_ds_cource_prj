@@ -1,10 +1,6 @@
 **/.git
 models
 
-# Self-hosted runner for GitHub Actions
-/gh_actions_runner/
-
-
 misc/
 todo.txt
 
