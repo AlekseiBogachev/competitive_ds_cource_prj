@@ -89,7 +89,7 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Check Python modules
+      - name: Check Python modules and Jupyter Notebooks
         run: poetry run ruff check
 
   mypy:
