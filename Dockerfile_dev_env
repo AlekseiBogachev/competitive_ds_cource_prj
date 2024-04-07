@@ -1,0 +1,17 @@
+FROM comp_ds_prj_base
+
+ARG UNAME=dockeruser
+
+USER root
+
+COPY . /${UNAME}/comp_ds_prj
+
+RUN chown ${UNAME} -R /${UNAME}/comp_ds_prj
+
+USER $UNAME
+
+WORKDIR /${UNAME}/comp_ds_prj
+
+RUN poetry install
+
+CMD /bin/bash
