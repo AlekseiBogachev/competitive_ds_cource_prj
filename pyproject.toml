@@ -34,6 +34,7 @@ pandas-stubs = "^2.2.0.240218"
 types-seaborn = "^0.13.2.20240311"
 ruff = "^0.3.5"
 nbqa = "^1.8.5"
+pre-commit = "^3.7.0"
 
 [build-system]
 requires = ["poetry-core"]
