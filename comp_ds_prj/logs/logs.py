@@ -7,8 +7,8 @@ from typing import Union
 
 
 def setup_logging_to_file(
-        dir: Union[str, None] = None,
-        format_str: str = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    dir: Union[str, None] = None,
+    format_str: str = "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 ) -> logging.Logger:
     """Возвращает настроенный логер для записи журнала.
 
@@ -31,7 +31,7 @@ def setup_logging_to_file(
         Настроенный логер.
     """
     project_dir: Path = Path(__file__).resolve().parents[2]
-    logs_path: Path = Path.joinpath(project_dir, 'logs')
+    logs_path: Path = Path.joinpath(project_dir, "logs")
 
     if dir is not None:
         logs_path = Path(dir)
@@ -42,7 +42,7 @@ def setup_logging_to_file(
     logger.setLevel(logging.INFO)
 
     raw_data_handler: logging.FileHandler = logging.FileHandler(
-        Path.joinpath(logs_path, f'{__name__}.log'), mode='a'
+        Path.joinpath(logs_path, f"{__name__}.log"), mode="a"
     )
     raw_data_formatter: logging.Formatter = logging.Formatter(format_str)
 

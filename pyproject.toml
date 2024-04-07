@@ -29,29 +29,42 @@ missingno = "^0.5.2"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.2.0"
-flake8 = "^7.0.0"
-nbqa = "^1.7.1"
-pydocstyle = "^6.3.0"
 mypy = "^1.8.0"
-isort = "^5.13.2"
 pandas-stubs = "^2.2.0.240218"
 types-seaborn = "^0.13.2.20240311"
+ruff = "^0.3.5"
+nbqa = "^1.8.5"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 
-[tool.black]
-line_length = 80
+[tool.ruff]
+extend-include = ["*.ipynb"]
+extend-exclude = ["references/*"]
+indent-width = 4
+line-length = 80
+target-version = "py311"
 
+[tool.ruff.lint]
+select = ["D", "E", "F", "I", "W"]
+ignore = ["D301", "E731"]
+fixable = ["F401", "I001", "W291", "W292", "W293"]
 
-[tool.isort]
-profile = "black"
-multi_line_output = 3
-line_length = 80
-include_trailing_comma = true
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "D104"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint.isort]
+force-wrap-aliases = true
+combine-as-imports = true
 
 
 [tool.mypy]
@@ -69,8 +82,3 @@ module = [
     "sklearn.model_selection"
 ]
 ignore_missing_imports = true
-
-
-[tool.pydocstyle]
-convention = "numpy"
-add_ignore = "D301"

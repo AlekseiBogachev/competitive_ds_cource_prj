@@ -46,16 +46,21 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: isort Python modules
-        run: poetry run isort ./comp_ds_prj/
-
-      - name: isort Jupyter Notebooks
-        run: poetry run nbqa isort ./notebooks/
+      - name: sort imports and fix spaces
+        run: poetry run ruff check --fix
 
       - name: Git Auto Commit
         uses: stefanzweifel/git-auto-commit-action@v5.0.0
         with:
           commit_message: Automated Change - sort imports
+
+      - name: autoformat
+        run: poetry run ruff format
+
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v5.0.0
+        with:
+          commit_message: Automated Change - autoformat all code
             
   test:
     runs-on: [self-hosted,ubuntu,ds,no-gpu]
@@ -73,7 +78,7 @@ jobs:
       - name: Print number of tests
         run: echo There are no tests!
 
-  flake:
+  ruff_check:
     runs-on: [self-hosted,ubuntu,ds,no-gpu]
     needs: [check_environment, autoformatter]
     continue-on-error: true
@@ -84,28 +89,8 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Check Python modules
-        run: poetry run flake8 ./comp_ds_prj/
-
-      - name: Check Jupyter Notebooks
-        run: poetry run nbqa flake8 ./notebooks/
-
-  pydocstyle:
-    runs-on: [self-hosted,ubuntu,ds,no-gpu]
-    needs: [check_environment, autoformatter]
-    continue-on-error: true
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
-
-      - name: Install dependencies
-        run: poetry install
-
-      - name: Check Python modules
-        run: poetry run pydocstyle --match='(?!test_|__init__).*\.py' ./comp_ds_prj/
-
-      - name: Check Jupyter Notebooks
-        run: poetry run nbqa pydocstyle --match='(?!test_|__init__).*\.ipynb' ./notebooks/
+      - name: Check Python modules and Jupyter Notebooks
+        run: poetry run ruff check
 
   mypy:
     runs-on: [self-hosted,ubuntu,ds,no-gpu]

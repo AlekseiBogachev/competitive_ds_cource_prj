@@ -13,7 +13,7 @@ ARG UNAME=dockeruser
 RUN chown -R $UNAME /$UNAME
 USER $UNAME
 
-COPY poetry.lock pyproject.toml ./
+COPY poetry.loc[k] pyproject.toml ./
 RUN poetry install --no-root
 
 CMD /bin/bash
