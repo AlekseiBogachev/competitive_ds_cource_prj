@@ -10,3 +10,6 @@
 
 # Self-hosted runner for GitHub Actions
 /gh_actions_runner/.secret_token
+
+# comp_ds_prj_dev token
+.dev_env_pat
