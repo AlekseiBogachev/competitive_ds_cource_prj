@@ -1,0 +1,25 @@
+FROM comp_ds_prj_base
+
+ARG UNAME=dockeruser
+ARG UID=1001
+ARG GID=1001
+ARG REPO=AlekseiBogachev/competitive_ds_cource_prj.git
+
+USER root
+
+COPY . /${UNAME}/comp_ds_prj
+
+RUN chown ${UNAME} -R /${UNAME}/comp_ds_prj
+
+USER $UNAME
+
+WORKDIR /${UNAME}/comp_ds_prj
+
+RUN poetry install
+
+RUN --mount=type=secret,id=pat,uid=${UID} \
+git remote set-url origin https://$(cat /run/secrets/pat)@github.com/${REPO}
+
+RUN poetry run pre-commit install --overwrite
+
+CMD /bin/bash

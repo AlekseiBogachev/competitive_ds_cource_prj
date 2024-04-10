@@ -1,3 +1,6 @@
+**/.git
+models
+
 misc/
 todo.txt
 
@@ -104,4 +107,4 @@ target/
 /catboost_info/
 
 # Self-hosted runner for GitHub Actions
-/gh_actions_runner/.secret_token
+/gh_actions_runner/

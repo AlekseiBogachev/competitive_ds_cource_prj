@@ -1,4 +1,4 @@
-FROM comp_ds_prj
+FROM comp_ds_prj_base
 
 USER root
 
