@@ -1,6 +1,16 @@
 # competitive_ds_cource_prj
 
-Проект для курса [Введение в соревновательный Data Science](https://stepik.org/course/108888/info) на [Stepic](https://stepik.org/).
+Проект для курса
+[MLOps и production в DS исследованиях 3.0](https://ods.ai/tracks/mlops3-course-spring-2024)
+и курса [Введение в соревновательный Data Science](https://stepik.org/course/108888/info)
+на [Stepic](https://stepik.org/).
+
+> [!IMPORTANT]
+> **Разработка проекта ведётся по методологии GitHub-flow. Подробенне в
+> [CONTRIBUTING.md](/CONTRIBUTING.md).**
+
+> [!WARNING]
+> **Проект и документация в стадии разработки.**
 
 ## Краткое описание проекта
 
