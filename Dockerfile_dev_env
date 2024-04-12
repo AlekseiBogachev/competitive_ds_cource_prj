@@ -20,6 +20,6 @@ RUN poetry install
 RUN --mount=type=secret,id=pat,uid=${UID} \
 git remote set-url origin https://$(cat /run/secrets/pat)@github.com/${REPO}
 
-RUN poetry run pre-commit install --overwrite
+RUN poetry run pre-commit install --install-hooks --overwrite
 
 CMD /bin/bash
