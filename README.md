@@ -58,9 +58,9 @@ $\log$ - натуральный логарифм.
    - [gh_actions_runner/start_runner.sh](/gh_actions_runner/start_runner.sh) - запуск
      контейнера с self-hosted runner для GitHub Actions и самого ранера.
 
-   Подробнее о развёртывании и запуске в [CONTRIBUTING.md](/CONTRIBUTING.md) и
-   разделах [Среда разработки](/docs/development_environment.md),
-   [CI/CD конвейер GihHub Actions](/docs/ci_cd_gh_actions.md).
+Подробнее о развёртывании и запуске в [CONTRIBUTING.md](/CONTRIBUTING.md) и
+разделах [Среда разработки](/docs/development_environment.md),
+[CI/CD конвейер GihHub Actions](/docs/ci_cd_gh_actions.md).
 
 Применяемые в проекте инструменты автоматизации описаны в разделе
 [Инструменты автоматизации](/README.md/#Инструменты-автоматизации).
