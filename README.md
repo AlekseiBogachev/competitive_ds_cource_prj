@@ -56,6 +56,13 @@ $\log$ - натуральный логарифм.
 ## Ключи
 
 Для работы с проектом необходимо предоставить следующие ключи:
+- `/.dev_env_pat` - файл с
+  [PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+  для доступа к репозиторию из среды разработки в контейнере.
+- `/.gdrive/credentials.json` - ключи для доступа DVC к удалённому хранилищу Google Drive.
+  ([подробнее](https://dvc.org/doc/user-guide/data-management/remote-storage/google-drive)).
+- `/gh_actions_runner/.secret_token` - Временный токен для работы self-hosted runner с GitHub Actions
+  ([подробнее](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/adding-self-hosted-runners)).
 
 ## Документация
 
@@ -93,6 +100,7 @@ $\log$ - натуральный логарифм.
     ├── docs                          <- Документация проекта.
     │   └── figures                   <- Иллюстрации для документации.
     |
+    ├── .dev_env_pat                  <- файл с PAT для доступа к репозиторию из среды разработки в контейнере.
     ├── .dvc                          <- Временные файлы и настройки DVC, в том числе и данные для доступа ко внешнему 
     |   |                                хранилищу.
     │   ├── config                    <- Глобальные настройки.
