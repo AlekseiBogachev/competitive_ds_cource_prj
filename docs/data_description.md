@@ -2,7 +2,7 @@
 
 ## Основная информация
 
-Данные состоят из несколько их файлов. Описание машин и информация о поломках собраны в следующих:
+Данные состоят из нескольких файлов. Описание машин и информация о поломках собраны в следующих таблицах:
 
 - [`car_train.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/car_train.csv) - данные для обучения моделей;
 - [`car_test.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/car_test.csv) - данные для подготовки прогноза для соревнования;
@@ -22,15 +22,15 @@
 
 ## Дополнительная информация
 
-Дополнительные данныесодержатся в следующих файлах:
+Дополнительные данные содержатся в следующих файлах:
 
-- [`rides_info.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/rides_info.csv) - информация про поездки;
-- [`driver_info.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/driver_info.csv) - информация про водителей;
+- [`rides_info.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/rides_info.csv) - информация о поездках;
+- [`driver_info.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/driver_info.csv) - информация о водителях;
 - [`fix_info.csv`](https://raw.githubusercontent.com/a-milenkin/Competitive_Data_Science/main/data/fix_info.csv) - информация о ремонтах машин.
 
 Описание столбцов `rides_info.csv`:
 
-- `user_id` - идентификаторы водителя;
+- `user_id` - идентификатор водителя;
 - `car_id` - id машины;
 - `ride_id` - id поездки;
 - `ride_date` - дата поездки;
@@ -61,7 +61,7 @@
 - `car_id` - идентификатор машины;
 - `work_type` - тип проводимой работы;
 - `work_duration` - длительность проводимой работы в часах;
-- `destroy_degree` - степень износа/повреждённости машины в случае поломки;
+- `destroy_degree` - степень износа/повреждения машины в случае поломки;
 - `fix_date` - время начала ремонта (снятия машины с линии).
   
 ## Схема данных
