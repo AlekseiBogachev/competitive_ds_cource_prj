@@ -47,21 +47,27 @@ $\log$ - натуральный логарифм.
    [Ключи](/README.md/#Ключи)).
 4. Собрать образы контейнеров и запустить их. Для сборки и запуска пользователю
    предлагается использовать следующие скрипты:
-   - [build.sh](/build.sh),
-   - [start.sh](/start.sh),
-   - [jupyter.sh](/jupyter.sh),
-   - [gh_actions_runner/build_runner.sh](/gh_actions_runner/build_runner.sh),
-   - [gh_actions_runner/start_runner.sh](/gh_actions_runner/start_runner.sh).
-   Подробнее о развёртывании и запуске в [CONTRIBUTING.md](/CONTRIBUTING.md) и
-   разделах [Среда разработки](/docs/development_environment.md),
-   [CI/CD конвейер GihHub Actions](/docs/ci_cd_gh_actions.md).
+   - [build.sh](/build.sh) - сборка образа базов контейнера и контейнера со
+     средой разработки.
+   - [start.sh](/start.sh) - запуск контейнера со средой разработки в
+     интерактивном режиме с использованием `/bin/bash`,
+   - [jupyter.sh](/jupyter.sh) - запуск контейнера со средой разработки с
+     запущенным сервером Jupyter Notebook,
+   - [gh_actions_runner/build_runner.sh](/gh_actions_runner/build_runner.sh) - сборка
+     контейнера с self-hosted runner для GitHub Actions,
+   - [gh_actions_runner/start_runner.sh](/gh_actions_runner/start_runner.sh) - запуск
+     контейнера с self-hosted runner для GitHub Actions и самого ранера.
+
+Подробнее о развёртывании и запуске в [CONTRIBUTING.md](/CONTRIBUTING.md) и
+разделах [Среда разработки](/docs/development_environment.md),
+[CI/CD конвейер GihHub Actions](/docs/ci_cd_gh_actions.md).
 
 Применяемые в проекте инструменты автоматизации описаны в разделе
 [Инструменты автоматизации](/README.md/#Инструменты-автоматизации).
 
 ## Ключи
 
-Для работы с проектом необходимо предоставить следующие ключи:
+Для полноценной работы с проектом необходимо предоставить следующие ключи:
 
 - `/.dev_env_pat` - файл с
   [PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
@@ -124,7 +130,8 @@ $\log$ - натуральный логарифм.
     ├── docs                          <- Документация проекта.
     │   └── figures                   <- Иллюстрации для документации.
     |
-    ├── .dev_env_pat                  <- файл с PAT для доступа к репозиторию из среды разработки в контейнере.
+    ├── .dev_env_pat                  <- файл с PAT для доступа к удалённому репозиторию GitHub из среды разработки в
+    |                                    контейнере.
     ├── .dvc                          <- Временные файлы и настройки DVC, в том числе и данные для доступа ко внешнему 
     |   |                                хранилищу.
     │   ├── config                    <- Глобальные настройки.
@@ -162,7 +169,8 @@ $\log$ - натуральный логарифм.
     |                                    разделов, например описания окружения разработки и процесса его
     |                                    развёртывания есть документация (каталог docs).
     |
-    ├── build.sh                      <- Скрипт, собирающий образ контейнера с окружением разработки из Dockerfile.
+    ├── build.sh                      <- Скрипт, собирающий образ базового контейнера из Dockerfile и образ контейнера
+    |                                    непосредственно с окружением разработки из Dockerfile_dev_env.
     ├── Dockerfile                    <- Dockerfile базового контейнера.
     ├── Dockerfile_dev_env            <- Dockerfile контейнера со средой разработки.
     ├── .dockerignore                 <- Аналог .gitignore для Docker. Docker не будет копировать и обрабатывать всё,
@@ -184,6 +192,6 @@ $\log$ - натуральный логарифм.
     ├── requirements.txt              <- Файл с зафиксированными зависимостями Poetry, экспортированный в формате для
     |                                    других менеджеров пакетов.
     ├── README.md                     <- README.md верхнего уровня, отображающийся на заглавной странице репозитория.
-    ├── CONTRIBUTING.md               <- Описание для новых участников проекта.
+    ├── CONTRIBUTING.md               <- Руководство для новых участников проекта.
     └── start.sh                      <- Скрипт для запуска контейнера среды разработки. Предоставляет доступ к
                                          /bin/bash в контейнере.
