@@ -93,22 +93,20 @@ user@user-pc:~/Project$ ./gh_actions_runner/build_runner.sh
    каталога проекта.
 10. Командой по умолчанию назначается вызов Bash (`/bin/bash`).
 
-Регистрация и запуск
-[self-hoted runner](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners)
-происходят при выполнении скрипта
-[start_runner.sh](/gh_actions_runner/start_runner.sh).
-
 > [!IMPORTANT]
 > Нужно иметь в виду, что скрипт
 > [build_runner.sh](/gh_actions_runner/build_runner.sh) соберёт контейнер даже,
 > если токен для регистрации не указан или просрочен.
 
-Для регистрации и запуска
+Регистрация и запуск
 [self-hoted runner](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners)
-нужно использовать скрипт [start_runner.sh](/gh_actions_runner/start_runner.sh).
-Скрипт запустит контейнер, прочитает токен из файла
-`/gh_actions_runner/.secret_token`, зарегистрирует и запустит runner.
-Для этого нужно из корневого каталога репозитория выполнить следующую команду:
+происходят при выполнении скрипта
+[start_runner.sh](/gh_actions_runner/start_runner.sh).
+Скрипт [start_runner.sh](/gh_actions_runner/start_runner.sh) запустит контейнер,
+прочитает токен из файла `/gh_actions_runner/.secret_token`, зарегистрирует и
+запустит runner. Для запуска
+[start_runner.sh](/gh_actions_runner/start_runner.sh) нужно из корневого
+каталога репозитория выполнить следующую команду:
 
 ```shell
 user@user-pc:~/Project$ ./gh_actions_runner/start_runner.sh
@@ -126,12 +124,9 @@ user@user-pc:~/Project$ ./gh_actions_runner/start_runner.sh
 Для удаления регистрации раннера и его остановки нужно выполнить скрипт
 [remove_runner.sh](/gh_actions_runner/remove_runner.sh). Скрипт удалит
 регистрацию созданного раннера `ubuntu-ds-runner`, после чего контейнер с
-раннером сам остановится.
-
-Для удаления регистрации раннера нужно использовать скрипт
-[remove_runner.sh](/gh_actions_runner/remove_runner.sh).Для запуска скрипта
-[remove_runner.sh](/gh_actions_runner/remove_runner.sh) нужно из корневого
-каталога репозитория выполнить следующую команду:
+раннером сам остановится. Для запуска
+скрипта [remove_runner.sh](/gh_actions_runner/remove_runner.sh) нужно из
+корневого каталога репозитория выполнить следующую команду:
 
 ```shell
 user@user-pc:~/Project$ ./gh_actions_runner/remove_runner.sh
